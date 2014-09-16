@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+configuracion del componente ver jform los distintos parametros que puede tener
+-->
+
+
+<config>
+<fieldset name="component"
+label="COM_RESERVA_COMPONENT_LABEL"
+description="COM_RESERVA_COMPONENT_DESC"
+>
+</fieldset>
+</config>
+<!--conjunto Permisos muestra los permisos definidos en access.xml -->
+
+    <fieldset 
+        name="permissions"
+        description="JCONFIG_PERMISSIONS_DESC"
+        label="JCONFIG_PERMISSIONS_LABEL" 
+    >
+        <field 
+            name="rules" type="rules"
+            component="com_reserva"
+            filter="rules"
+            validate="rules"
+            label="JCONFIG_PERMISSIONS_LABEL"
+            section="component"
+        />
+    </fieldset>
+</config>
