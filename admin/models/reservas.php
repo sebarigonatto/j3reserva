@@ -42,7 +42,7 @@ $query = $db->getQuery(true);
   
  */
 $query
-     ->select($db->quoteName(array('a.*', 'b.*', 'c.*')))
+     ->select(array('a.*', 'b.*', 'c.*'))
     ->from($db->quoteName('#__eventos_items', 'a'))
     ->join('INNER', $db->quoteName('#__eventos', 'b') . ' ON (' . $db->quoteName('a.eventos_id') . ' = ' . $db->quoteName('b.id') . ')')
     ->join('INNER', $db->quoteName('#__items', 'c') . ' ON (' . $db->quoteName('a.items_id') . ' = ' . $db->quoteName('c.id') . ')')

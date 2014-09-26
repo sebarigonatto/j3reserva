@@ -67,8 +67,8 @@ LICENSE.txt</license>
     <folder>views</folder>
 </files>
 <languages folder="admin">
-    <language tag="en-GB">language/en-GB/es-ES.com_reserva.ini</language>
-    <language tag="en-GB">language/en-GB/es-ES.com_reserva.sys.ini</language>
+    <language tag="en-GB">language/es-ES/es-ES.com_reserva.ini</language>
+    <language tag="en-GB">language/es-ES/es-ES.com_reserva.sys.ini</language>
 </languages>
 </administration>
 </extension>

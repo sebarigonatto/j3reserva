@@ -2,8 +2,6 @@
 <!--
 configuracion del componente ver jform los distintos parametros que puede tener
 -->
-
-
 <config>
 <fieldset name="component"
 label="COM_RESERVA_COMPONENT_LABEL"
@@ -20,9 +18,6 @@ usuario mercado pago:
 contraseña:
 -->
 </fieldset>
-
-
-</config>
 <!--conjunto Permisos muestra los permisos definidos en access.xml -->
 
     <fieldset 
