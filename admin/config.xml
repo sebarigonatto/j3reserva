@@ -9,7 +9,19 @@ configuracion del componente ver jform los distintos parametros que puede tener
 label="COM_RESERVA_COMPONENT_LABEL"
 description="COM_RESERVA_COMPONENT_DESC"
 >
+    
+    <!--
+configuracion del componente ver jform
+hora de promocion: 4hs
+valor hora extra:$40
+descuento : 10%
+items necesario para descuento:2
+usuario mercado pago:
+contraseña:
+-->
 </fieldset>
+
+
 </config>
 <!--conjunto Permisos muestra los permisos definidos en access.xml -->
 

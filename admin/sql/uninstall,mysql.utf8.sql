@@ -1,3 +1,3 @@
-DROP TABLE IF EXISTS `#__reserva`;
-
-DROP TABLE IF EXISTS `#__item`;
+DROP TABLE IF EXISTS `#__eventos`;
+DROP TABLE IF EXISTS `#__items`;
+DROP TABLE IF EXISTS `#__eventos_items`;

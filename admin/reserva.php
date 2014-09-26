@@ -14,8 +14,7 @@ if (!JFactory::getUser()->authorise('core.manage', 'com_reserva'))
 //crea una instancia del controlador y especifica el nombre del componente
 //que sera el prefijo de todas las clases
 $controller = JControllerLegacy::getInstance('Reserva');
-//como tiene mas de una vista tiene una Tarea que determina lo proximo
-//hara el componente.
+//como tiene mas de una vista.la Tarea determina lo proximo hara el componente
 $controller->execute(JFactory::getApplication()->input->get('task'));
 //se redirecciona a la tarea obtenida
 $controller->redirect();
