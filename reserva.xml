@@ -41,15 +41,19 @@ LICENSE.txt</license>
 		<menu 
 			link="option=com_reserva&amp;view=diaria"
 			img="class:generic"
-			alt="Folio/Diaria">com_reserva_diaria
+			alt="Reserva/Diaria">com_reserva_diaria
 		</menu>
                 
                 <menu 
 			link="option=com_reserva&amp;view=estadistica"
 			img="class:generic"
-			alt="Folio/Estadistica">com_reserva_estadistica
+			alt="Reserva/Estadistica">com_reserva_estadistica
 		</menu>
-                
+                <menu 
+			link="option=com_reserva&amp;view=eventos"
+			img="class:generic"
+			alt="Reserva/Eventos">com_reserva_eventos
+		</menu>
 	</submenu>
 <files folder="admin">
 

@@ -3,7 +3,7 @@
 <?php
 defined('_JEXEC') or die;
 /*
- * muesrta la salida por pantalla de la vista
+ * muesrta la salida por pantalla de la vista eventos
  */
 
 $listOrder = '';
@@ -22,14 +22,20 @@ $listDirn = '';
             onclick="Joomla.checkAll(this)" />
             </th>
            
-            <th class="title"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_TITULO','a.titulo', $listDirn, $listOrder); ?></th>
-            <th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_INICIO', 'a.inicio', $listDirn, $listOrder); ?></th>
-            <th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_FIN', 'a.fin', $listDirn, $listOrder); ?></th>
+            <th class="title"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_TITULO','a.titulo', $listDirn, $listOrder); ?></th>
+            <th width="1%" class="nowrap center "><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_INICIO', 'a.inicio', $listDirn, $listOrder); ?></th>
+            <th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_FIN', 'a.fin', $listDirn, $listOrder); ?></th>
+            <th width="1%" class="nowrap center "><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_LUGAR', 'a.lugar', $listDirn, $listOrder); ?></th>
+            <th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_DESCRIPCION', 'a.descripcion', $listDirn, $listOrder); ?></th>
+            <th width="1%" class="nowrap center "><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_TEL', 'a.tel', $listDirn, $listOrder); ?></th>
+            <th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_MAIL', 'a.mail', $listDirn, $listOrder); ?></th>
+            
+            
             </tr>
             </thead>
 
         <tbody>
-        <!--  agrega los items obteneidos del modelo a cada fila   -->
+        <!--  agrega los items obteneidos del modelo a cada fila -->
         
             <?php foreach ($this->items as $i => $item) :?>
              <tr class="row<?php echo $i % 2; ?>">
@@ -41,6 +47,24 @@ $listDirn = '';
                     <?php echo $this->escape($item->titulo); ?>
                 </a>
                 </td>
+                <td class="nowrap has-context ">
+                    <?php echo $this->escape($item->inicio); ?>
+                </td>
+		 <td class="nowrap has-context center hidden-phone">
+                    <?php echo $this->escape($item->fin); ?>
+                </td>
+		<td class="nowrap has-context">
+                    <?php echo $this->escape($item->lugar); ?>
+                </td>
+		<td class="nowrap has-context center hidden-phone">
+                    <?php echo $this->escape($item->descripcion); ?>
+                </td>
+		 <td class="nowrap has-context">
+                    <?php echo $this->escape($item->tel); ?>					
+                </td>
+		 <td class="nowrap has-context center hidden-phone">
+                    <?php echo $this->escape($item->mail); ?>
+                </td>                
             </tr>
             <?php endforeach; ?>
             

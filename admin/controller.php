@@ -25,11 +25,9 @@ public function display($cachable = false, $urlparams = false)
     if ($view == 'reserva' && $layout == 'edit' && 
        !$this->checkEditId('com_reserva.edit.reserva', $id))
     {
-        $this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_
-        ID', $id));
+        $this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
         $this->setMessage($this->getError(), 'error');
-        $this->setRedirect(JRoute::_('index.php?option=com_
-        reserva&view=reservas', false));
+        $this->setRedirect(JRoute::_('index.php?option=com_reserva&view=reservas', false));
         return false;
     }
     parent::display();
