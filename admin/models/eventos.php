@@ -29,10 +29,8 @@ protected function getListQuery()
 {
 $db = $this->getDbo();
 $query = $db->getQuery(true);
-
-//realizar un inner join para obtener la relacion Muchos a Muchos entre eventos e items
 /* sql probado
-  
+ * obtiene todos los registro de la tabla eventos  
  */
 $query
      ->select(array('b.*'))

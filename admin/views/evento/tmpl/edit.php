@@ -2,14 +2,15 @@
 
 /*
  * vista de edicion presenta el formulario
- * 
+ * quiero ver si mezclas bien las cosas 
+ * git
  */
 defined('_JEXEC') or die;
 
 ?>
 
 
-<form action="<?php echo JRoute::_('index.php?option=com_folio&layout=edit&id='.(int) $this->item->id); ?>" 
+<form action="<?php echo JRoute::_('index.php?option=com_reserva&layout=edit&id='.(int) $this->item->id); ?>" 
       method="post" name="adminForm" id="adminForm" class="form-validate">
 <div class="row-fluid">
 <div class="span10 form-horizontal">
