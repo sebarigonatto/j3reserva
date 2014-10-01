@@ -6,13 +6,16 @@
  * git
  */
 defined('_JEXEC') or die;
+
 ?>
 
-<form action=" <?php echo JRoute::_('index.php?option=com_folio&layout=edit&id='.(int) $this->item->id); ?>" 
+
+<form action="<?php echo JRoute::_('index.php?option=com_folio&layout=edit&id='.(int) $this->item->id); ?>" 
       method="post" name="adminForm" id="adminForm" class="form-validate">
 <div class="row-fluid">
 <div class="span10 form-horizontal">
 <fieldset>
+    <?php echo 'hola eli programa';?>
 <?php echo JHtml::_('bootstrap.startPane', 'myTab',array('active' => 'details'));?>
 <?php echo JHtml::_('bootstrap.addPanel', 'myTab','details',empty($this->item->id) ?
  JText::_('COM_RESERVA_NEW_EVENTO', true) :JText::sprintf('COM_RESERVA_EDIT_EVENTO',$this->item->id, true));?>
@@ -43,6 +46,7 @@ defined('_JEXEC') or die;
 <div class="controls"><?php echo $this->form->getInput('descripcion'); ?></div>
 </div>
 
+    
 
 <?php echo JHtml::_('bootstrap.endPanel'); ?>
 <input type="hidden" name="task" value="" />
