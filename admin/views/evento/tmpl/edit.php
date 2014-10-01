@@ -4,6 +4,7 @@
  * vista de edicion presenta el formulario
  * quiero ver si mezclas bien las cosas 
  * git
+ * probando un pull en netbeans
  */
 defined('_JEXEC') or die;
 
