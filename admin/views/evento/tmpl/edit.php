@@ -2,7 +2,8 @@
 
 /*
  * vista de edicion presenta el formulario
- * 
+ * quiero ver si mezclas bien las cosas 
+ * git
  */
 defined('_JEXEC') or die;
 ?>
