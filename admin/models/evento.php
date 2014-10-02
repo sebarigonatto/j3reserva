@@ -24,7 +24,7 @@ public function getTable($type = 'Evento', $prefix = 'ReservaTable', $config = a
  * @return boolean
  */
 public function getForm($data = array(), $loadData = true)
-{	
+{	$app = JFactory::getApplication();
 	$form = $this->loadForm('com_reserva.evento', 'evento',array('control' => 'jform', 'load_data' => $loadData));
 	if (empty($form))
 	{
