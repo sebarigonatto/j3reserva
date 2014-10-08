@@ -13,9 +13,9 @@ public $typeAlias = 'com_reserva.evento';
  * @return type
  */
 public function getTable($type = 'Evento', $prefix = 'ReservaTable', $config = array())
-{        echo 'llega aca';
+{    
 	return JTable::getInstance($type, $prefix, $config);
-        echo 'pasoo por aca muere en otro lado';
+       
 }
 /**
  * obtiene el formulario evento.xml 

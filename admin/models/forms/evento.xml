@@ -6,7 +6,7 @@
 description="JGLOBAL_FIELD_ID_DESC"/>
 
 <field name="titulo" type="text" class="inputbox" 
-       size="40" label="COM_RESERVA_FIELD_TITULO" 
+       size="40" label="COM_RESERVA_FIELD_TITULO_LABEL" 
        description="COM_RESERVA_FIELD_TITULO_DESC" required="true" />
 
 <field name="inicio" type="calendar" class="inputbox"
@@ -22,7 +22,7 @@ size="50" label="COM_RESERVA_FIELD_LUGAR_LABEL"
 description="COM_RESERVA_FIELD_LUGAR_DESC" required="true" />
 
 <field name="descripcion" type="textarea" class="inputbox" 
-       rows="3" cols="30" label="COM_RESERVA_FIELD_DESCRIPCION" description="COM_RESERVA_FIELD_DESCRIPCION_DESC" />
+       rows="3" cols="30" label="COM_RESERVA_FIELD_DESCRIPCION_LABEL" description="COM_RESERVA_FIELD_DESCRIPCION_DESC" />
 
 <field name="tel" type="tel" id="phone" description="COM_RESERVA_FIELD_TEL_DESC" filter="string"
 label="COM_RESERVA_FIELD_TEL_LABEL"  size="30" required="true" validate="tel"/>
@@ -30,7 +30,9 @@ label="COM_RESERVA_FIELD_TEL_LABEL"  size="30" required="true" validate="tel"/>
 <field name="mail" type="email" class="inputbox" 
        size="30" description="COM_RESERVA_FIELD_MAIL_DESC" label="JGLOBAL_EMAIL" required="true" validate="email"/>
 
-<field name="state" type="list" label="JSTATUS" description="JFIELD_PUBLISHED_DESC" class="inputbox small" size="1" default="1" >
+<field name="state" type="list"
+label="JSTATUS" description="JFIELD_PUBLISHED_DESC"
+class="inputbox small" size="1" default="1" >
 <option value="1">JPUBLISHED</option>
 <option value="0">JUNPUBLISHED</option>
 <option value="2">JARCHIVED</option>
