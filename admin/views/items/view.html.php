@@ -22,6 +22,7 @@ class ReservaViewItems extends JViewLegacy
         $bar = JToolBar::getInstance('toolbar');
         JToolbarHelper::title(JText::_('COM_RESERVA_MANAGER_ITEMS'), '');
         JToolbarHelper::addNew('item.add');
+        
         if ($canDo->get('core.edit'))
         {
             JToolbarHelper::editList('item.edit');
@@ -30,5 +31,9 @@ class ReservaViewItems extends JViewLegacy
         {
             JToolbarHelper::preferences('com_reserva');
         }
+        if ($canDo->get('core.delete'))
+	{
+			JToolBarHelper::deleteList('', 'items.delete', 'JTOOLBAR_DELETE');
+	}
     }
 }
