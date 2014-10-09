@@ -4,17 +4,14 @@ class ReservaModelItem extends JModelAdmin
 {
 protected $text_prefix = 'COM_RESERVA';
 
-public function getTable($type = 'Item', $prefix = 
-'ReservaTable', $config = array())
+public function getTable($type = 'Item', $prefix = 'ReservaTable', $config = array())
 {
 return JTable::getInstance($type, $prefix, $config);
 }
 public function getForm($data = array(), $loadData = true)
 {
     $app = JFactory::getApplication();
-    $form = $this->loadForm('com_reserva.item', 'item', 
-                            array('control' => 'jform',
-                                  'load_data' => $loadData));
+    $form = $this->loadForm('com_reserva.item', 'item', array('control' => 'jform','load_data' => $loadData));
 
     if (empty($form))
     {
@@ -33,6 +30,6 @@ protected function loadFormData()
 }
 protected function prepareTable($table)
 {
-    $table->title = htmlspecialchars_decode($table->nombre,ENT_QUOTES);
+    $table->nombre = htmlspecialchars_decode($table->nombre,ENT_QUOTES);
 }
 }

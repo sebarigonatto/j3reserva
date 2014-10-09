@@ -1,7 +1,11 @@
 <?php
 defined('_JEXEC') or die;
 class ReservaHelper
-{
+{/**
+ * cheque los permisos del usuario actual que tiene sobre el componente
+ * @param type $categoryId
+ * @return \JObject
+ */
 public static function getActions($categoryId = 0)
 {
 	$user = JFactory::getUser();

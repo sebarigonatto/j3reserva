@@ -21,8 +21,7 @@ $listDirn = '';
             titulo="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" 
             onclick="Joomla.checkAll(this)" />
             </th>
-   
-            <th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID','a.id', $listDirn, $listOrder); ?>
+
             <th class="title"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_TITULO','a.titulo', $listDirn, $listOrder); ?></th>
             <th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_INICIO', 'a.inicio', $listDirn, $listOrder); ?></th>
             <th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_FIN', 'a.fin', $listDirn, $listOrder); ?></th>         
