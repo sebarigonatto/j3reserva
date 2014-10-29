@@ -13,9 +13,9 @@ public $typeAlias = 'com_reserva.evento';
  * @return type
  */
 public function getTable($type = 'Evento', $prefix = 'ReservaTable', $config = array())
-{        echo 'llega aca';
+{    
 	return JTable::getInstance($type, $prefix, $config);
-        echo 'pasoo por aca muere en otro lado';
+       
 }
 /**
  * obtiene el formulario evento.xml 
@@ -24,7 +24,7 @@ public function getTable($type = 'Evento', $prefix = 'ReservaTable', $config = a
  * @return boolean
  */
 public function getForm($data = array(), $loadData = true)
-{	
+{	$app = JFactory::getApplication();
 	$form = $this->loadForm('com_reserva.evento', 'evento',array('control' => 'jform', 'load_data' => $loadData));
 	if (empty($form))
 	{

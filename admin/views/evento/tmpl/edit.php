@@ -4,6 +4,7 @@
  * vista de edicion presenta el formulario
  * quiero ver si mezclas bien las cosas 
  * git
+ * probando un pull en netbeans
  */
 defined('_JEXEC') or die;
 
@@ -15,39 +16,21 @@ defined('_JEXEC') or die;
 <div class="row-fluid">
 <div class="span10 form-horizontal">
 <fieldset>
-    <?php echo 'hola eli programa';?>
-<?php echo JHtml::_('bootstrap.startPane', 'myTab',array('active' => 'details'));?>
-<?php echo JHtml::_('bootstrap.addPanel', 'myTab','details',empty($this->item->id) ?
+    <?php echo JHtml::_('bootstrap.startPane', 'myTab',array('active' => 'details'));?>
+    <?php echo JHtml::_('bootstrap.addPanel', 'myTab','details',empty($this->item->id) ?
  JText::_('COM_RESERVA_NEW_EVENTO', true) :JText::sprintf('COM_RESERVA_EDIT_EVENTO',$this->item->id, true));?>
 
-<div class="control-group">
-<div class="control-label"><?php echo $this->form->getLabel('titulo'); ?></div>
-<div class="controls"><?php echo $this->form->getInput('titulo'); ?></div>
-</div>
-
-<div class="control-group">
-<div class="control-label"><?php echo $this->form->getLabel('published'); ?></div>
-<div class="controls"><?php echo $this->form->getInput('published'); ?></div>
-</div>
-
-
-<div class="control-group">
-<div class="control-label"><?php echo $this->form->getLabel('company'); ?></div>
-<div class="controls"><?php echo $this->form->getInput('company'); ?></div>
-</div>
-
-<div class="control-group">
-<div class="control-label"><?php echo $this->form->getLabel('tel'); ?></div>
-<div class="controls"><?php echo $this->form->getInput('tel'); ?></div>
-</div>
-
-<div class="control-group">
-<div class="control-label"><?php echo $this->form->getLabel('descripcion'); ?></div>
-<div class="controls"><?php echo $this->form->getInput('descripcion'); ?></div>
-</div>
-
-    
-
+   <?php foreach ($this->form->getFieldset('myfields') as $field): ?>
+        <div class="control-group">
+         <div class="control-label">
+           <?php echo $field->label; ?>
+         </div>
+         <div class="controls">
+           <?php echo $field->input; ?>
+          </div>
+       </div>
+   <?php endforeach; ?> 
+  
 <?php echo JHtml::_('bootstrap.endPanel'); ?>
 <input type="hidden" name="task" value="" />
 <?php echo JHtml::_('form.token'); ?>

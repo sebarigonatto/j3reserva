@@ -13,4 +13,5 @@ public function getModel($name = 'Evento', $prefix = 'ReservaModel', $config = a
     $model = parent::getModel($name, $prefix, $config);
     return $model;
 }
+
 }
