@@ -1,12 +1,10 @@
 <?php
 defined('_JEXEC') or die;
-
-class ReservaTableEvento extends JTable
+class ReservaTableItem extends JTable
 {
-    
     public function __construct(&$db)
     {
-        parent::__construct('#__reserva_evento', 'id', $db);
+        parent::__construct('#__reserva_reserva', 'id', $db);
     }
 
     /**

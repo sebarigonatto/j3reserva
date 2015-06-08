@@ -13,7 +13,7 @@ class ReservaModelEventos extends JModelList
     if (empty($config['filter_fields']))
     {
         $config['filter_fields'] = array(
-        'evento_id', 'b.eventos_id',
+        'evento_id', 'b.evento_id',
         'evento_titulo', 'b.titulo',
         'evento_inicio', 'b.inicio',
         'evento_fin', 'b.fin',
@@ -29,14 +29,12 @@ protected function getListQuery()
 {
 $db = $this->getDbo();
 $query = $db->getQuery(true);
-
-//realizar un inner join para obtener la relacion Muchos a Muchos entre eventos e items
 /* sql probado
-  
+ * obtiene todos los registro de la tabla eventos  
  */
 $query
      ->select(array('b.*'))
-    ->from($db->quoteName('#__eventos', 'b'))
+    ->from($db->quoteName('#__reserva_evento', 'b'))
      ;
 
 return $query;

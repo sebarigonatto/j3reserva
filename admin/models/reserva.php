@@ -1,10 +1,9 @@
 <?php
-
-class ReservaModelEvento extends JModelAdmin
+defined('_JEXEC') or die;
+class ReservaModelReserva extends JModelAdmin
 {
 	//Prefijo que será usado con los mensajes del controlador
-	protected $text_prefix = 'COM_RESERVA';
-	//public $typeAlias = 'com_reserva.evento';
+	protected $text_prefix = 'COM_FOLIO';
 	
 	/**
 	 * El modelo llama a la tabla
@@ -14,10 +13,9 @@ class ReservaModelEvento extends JModelAdmin
 	 * @param type $config
 	 * @return type
 	 */
-	public function getTable($type = 'Evento', $prefix = 'ReservaTable', $config = array())
-	{    
+	public function getTable($type = 'Reserva', $prefix = 'ReservaTable', $config = array())
+	{
 		return JTable::getInstance($type, $prefix, $config);
-		   
 	}
 	
 	/**
@@ -27,19 +25,21 @@ class ReservaModelEvento extends JModelAdmin
 	 * @return boolean
 	 */
 	public function getForm($data = array(), $loadData = true)
-	{	$app = JFactory::getApplication();
-		$form = $this->loadForm('com_reserva.evento', 'evento', array('control' => 'jform', 'load_data' => $loadData));
+	{
+		$app = JFactory::getApplication();
+		$form = $this->loadForm('com_reserva.reserva', 'reserva',
+		array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form))
 		{
 			return false;
-		}     
+		}
 		return $form;
 	}
 	
 	// Carga los datos en el formulario
 	protected function loadFormData()
 	{
-		$data = JFactory::getApplication()->getUserState('com_reserva.edit.evento.data', array());
+		$data = JFactory::getApplication()->getUserState('com_reserva.edit.reserva.data', array());
 		if (empty($data))
 		{
 			$data = $this->getItem();
@@ -53,10 +53,10 @@ class ReservaModelEvento extends JModelAdmin
 	 */
 	protected function prepareTable($table)
 	{
-		$table->titulo = htmlspecialchars_decode($table->titulo, ENT_QUOTES);
+		$table->title = htmlspecialchars_decode($table->title, ENT_QUOTES);
 	}
-
-
+	
+	
 	/**
 	 *  controla permisos para borrar items
 	 * @param type $record
@@ -100,3 +100,5 @@ class ReservaModelEvento extends JModelAdmin
 		}
 	}
 }
+
+?>

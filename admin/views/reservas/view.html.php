@@ -1,43 +1,46 @@
 <?php
 /*
- * crea las barras de menu, solocita items etc y el el template presenta los
- * datos que se encuentra en /tmpl/default.php
- * vista Reservas: vista de lista 
+ * Aquí se definen los botones de la barra de tareas (toolbar),
+ * títulos para la vista, y donde se llama al modelo para obtener 
+ * los datos que se encuentran en /tmpl/default.php, listos para dárselos a la vista
  */
-
+ 
 defined('_JEXEC') or die;
 class ReservaViewReservas extends JViewLegacy
 {
-	protected $items; //items obtenidos del modelo
+	protected $items; //items obtenidos del archivo de modelo /models/reservas.php
 	protected $state;//permite saber cual es columna ordenar y la direccion  
-	protected $pagination;//paginacion de item 
+	protected $pagination;//paginación de items
 
 	public function display($tpl = null)
 	{
 		$this->items = $this->get('Items');
 		$this->state = $this->get('State');
 		$this->pagination = $this->get('Pagination');
-		//agrega los link de submenus a la barra de navegacion
+		//agrega los links de submenus a la barra de navegación
 		if (count($errors = $this->get('Errors')))
 		{
 			JError::raiseError(500, implode("\n", $errors));
-		return false;
+			return false;
 		}
 		$this->addToolbar();
-			//barra de busqueda y fitro
+		//barra de busqueda y fitro
 		parent::display($tpl);
 	}
 
+	// Agrega los botones arriba de la vista [New, Edit, Options]
 	protected function addToolbar()
 	{
-		$canDo = ReservaHelper::getActions();
+		$canDo = ReservaHelper::getActions(); // Extrae los permisos del usuario actual
 		$bar = JToolBar::getInstance('toolbar');
 		JToolbarHelper::title(JText::_('COM_RESERVA_MANAGER_RESERVAS'), '');
 		JToolbarHelper::addNew('reserva.add');
+		// Si tiene permisos para editar, se muestra el botón
 		if ($canDo->get('core.edit'))
 		{
 			JToolbarHelper::editList('reserva.edit');
 		}
+		
 		if ($canDo->get('core.edit.state')) 
 		{
 			JToolbarHelper::publish('reservas.publish', 'JTOOLBAR_PUBLISH',true);
@@ -46,7 +49,7 @@ class ReservaViewReservas extends JViewLegacy
 			JToolbarHelper::checkin('reservas.checkin');
 		}
 		
-		//agregar filtro a la vista para busqueda
+		//agregar filtro a la vista para búsqueda
 		JHtmlSidebar::setAction('index.php?option=com_reserva&view=reservas');
 		JHtmlSidebar::addFilter(JText::_('JOPTION_SELECT_PUBLISHED'),'filter_state',
 		JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'),'value', 'text', 
@@ -57,13 +60,14 @@ class ReservaViewReservas extends JViewLegacy
 		{
 			JToolBarHelper::deleteList('', 'reservas.delete', 'JTOOLBAR_DELETE');
 		}
-		se replaza el boton de borrado por envio a la papelera en vez de borrado completamente
+		se reemplaza el boton de borrado por envio a la papelera en vez de borrado completamente
 		*/
 		$state  = $this->get('State');
 		if ($state->get('filter.state') == -2 && $canDo->get('core.delete'))
 		{
 			JToolbarHelper::deleteList('', 'reservas.delete', 'JTOOLBAR_EMPTY_TRASH');
-		} elseif ($canDo->get('core.edit.state'))
+		} 
+		elseif ($canDo->get('core.edit.state'))
 		{
 			JToolbarHelper::trash('reservas.trash');
 		}
