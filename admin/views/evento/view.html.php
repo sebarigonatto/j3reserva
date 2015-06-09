@@ -21,7 +21,7 @@ class ReservaViewEvento extends JViewLegacy
         parent::display($tpl);
     }
     
-  /*  protected function addToolbar()
+    protected function addToolbar()
     {
         JFactory::getApplication()->input->set('hidemainmenu', true);
         JToolbarHelper::title(JText::_('COM_RESERVA_MANAGER_EVENTO'), '');
@@ -35,7 +35,7 @@ class ReservaViewEvento extends JViewLegacy
             JToolbarHelper::cancel('evento.cancel', 'JTOOLBAR_CLOSE');
         }
     }
-    */
+    /*
  	protected function addToolbar()
 	{
 		JFactory::getApplication()->input->set('hidemainmenu', true);
@@ -71,5 +71,6 @@ class ReservaViewEvento extends JViewLegacy
 			JToolbarHelper::cancel('evento.cancel', 'JTOOLBAR_CLOSE');
 		}
 	}
+	*/
     
 }

@@ -1,6 +1,6 @@
 <?php
 defined('_JEXEC') or die;
-class ReservaTableItem extends JTable
+class ReservaTableReserva extends JTable
 {
     public function __construct(&$db)
     {

@@ -3,7 +3,7 @@ defined('_JEXEC') or die;
 class ReservaModelReserva extends JModelAdmin
 {
 	//Prefijo que será usado con los mensajes del controlador
-	protected $text_prefix = 'COM_FOLIO';
+	protected $text_prefix = 'COM_RESERVA';
 	
 	/**
 	 * El modelo llama a la tabla
@@ -53,7 +53,9 @@ class ReservaModelReserva extends JModelAdmin
 	 */
 	protected function prepareTable($table)
 	{
-		$table->title = htmlspecialchars_decode($table->title, ENT_QUOTES);
+	//VER POR QUE NO ANDA ESTO: PAG 129
+	//title debería ser una columna de la tabla esta!!!
+		//$table->title = htmlspecialchars_decode($table->title, ENT_QUOTES);
 	}
 	
 	

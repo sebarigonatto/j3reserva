@@ -52,7 +52,7 @@
 						</a>
 					</td>
 					<td class="nowrap has-context">
-						<img src="../<?php echo $item->imagen; ?>" width="150">
+						<img src="../<?php echo $item->img; ?>" width="150">
 					</td>
 					<td class="center hidden-phone">
 						<?php echo $this->escape($item->descripcion); ?>

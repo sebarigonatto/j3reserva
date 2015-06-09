@@ -2,6 +2,7 @@
 
 /*
  * modelo para la Vista Reservas
+ * Selecciona los datos de la base de datos que se muestran en la vista
  */
 
 defined('_JEXEC') or die;
@@ -13,7 +14,7 @@ class ReservaModelReservas extends JModelList
 		if (empty($config['filter_fields']))
 		{
 			$config['filter_fields'] = array(
-			'evento_id', 'b.eventos_id',
+			'evento_id', 'b.id',
 			'evento_titulo', 'b.titulo',
 			'evento_inicio', 'b.inicio',
 			'evento_fin', 'b.fin',
@@ -21,11 +22,11 @@ class ReservaModelReservas extends JModelList
 			'evento_descripcion', 'b.descripcion',
 			'evento_tel', 'b.tel',
 			'evento_mail', 'b.mail',
-			'items_id', 'c.id',
-			'items_nombre', 'c.nombre',
-			'items_imagen','c.img',
-			'items_descripcion','c.descripcion',
-			'items_costo','c.costo'
+			'item_id', 'c.id',
+			'item_nombre', 'c.nombre',
+			'item_imagen','c.img',
+			'item_descripcion','c.descripcion',
+			'precio','a.precio'
 			);
 		}
 		parent::__construct($config);

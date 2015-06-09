@@ -15,12 +15,12 @@ $listDirn = '';
 						titulo="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" 
 						onclick="Joomla.checkAll(this)" />
 					</th>
-					<th class="title"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_TITULO','a.titulo', $listDirn, $listOrder); ?></th>
-					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_INICIO', 'a.inicio', $listDirn, $listOrder); ?></th>
-					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_FIN', 'a.fin', $listDirn, $listOrder); ?></th>         
-					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_TEL', 'a.tel', $listDirn, $listOrder); ?></th>
-					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_LUGAR', 'a.lugar', $listDirn, $listOrder); ?></th>
-					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_DESCRIPCION', 'a.descripcion', $listDirn, $listOrder); ?></th>
+					<th class="title"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTO_TITULO','a.titulo', $listDirn, $listOrder); ?></th>
+					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTO_INICIO', 'a.inicio', $listDirn, $listOrder); ?></th>
+					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTO_FIN', 'a.fin', $listDirn, $listOrder); ?></th>         
+					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTO_TEL', 'a.tel', $listDirn, $listOrder); ?></th>
+					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTO_LUGAR', 'a.lugar', $listDirn, $listOrder); ?></th>
+					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTO_DESCRIPCION', 'a.descripcion', $listDirn, $listOrder); ?></th>
 				</tr>
 			</thead>
 			<tbody>
