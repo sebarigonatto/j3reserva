@@ -36,7 +36,10 @@ $itemsOptions=$items->getOptions();
 						<option value=""> - Select Items - </option>
 						<?php echo JHtml::_('select.options', $itemsOptions, 'value', 'text');?>
 					</select>
-                </div>
+                                </div>
+                                <div class="control-group">
+                                     <?php echo $this->form->getInput('items_checkboxes'); ?>
+                                </div>
 				<?php echo JHtml::_('bootstrap.endPanel'); ?>
 				<input type="hidden" name="task" value="" />
 				<?php echo JHtml::_('form.token'); ?>
