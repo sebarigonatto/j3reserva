@@ -20,5 +20,7 @@
 		<field name="items" type="itemsselect"
 			label="List of items"
 			required="true" />
+                
+                 <field name="items_checkboxes" type="ItemsCheckBoxes" required="true" />
 	</fieldset>
 </form>
