@@ -3,6 +3,10 @@
  * Es el layout de la vista para editar
  */
 defined('_JEXEC') or die;
+JFormHelper::addFieldPath(JPATH_COMPONENT . '/models/fields');
+$items = JFormHelper::loadFieldType('itemsselect', false);
+$itemsOptions=$items->getOptions();
+
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_reserva&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 	<div class="row-fluid">
@@ -27,6 +31,12 @@ defined('_JEXEC') or die;
 					<div class="control-label"> <?php echo $this->form->getLabel('precio'); ?> </div>
 					<div class="controls"> <?php echo $this->form->getInput('precio'); ?> </div>
 				</div>
+				<div class="combo-items">
+					<select name="filter_type" class="inputbox">
+						<option value=""> - Select Items - </option>
+						<?php echo JHtml::_('select.options', $itemsOptions, 'value', 'text');?>
+					</select>
+                </div>
 				<?php echo JHtml::_('bootstrap.endPanel'); ?>
 				<input type="hidden" name="task" value="" />
 				<?php echo JHtml::_('form.token'); ?>

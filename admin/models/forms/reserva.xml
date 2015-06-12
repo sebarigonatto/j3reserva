@@ -16,5 +16,9 @@
 		<field name="precio" type="text" class="inputbox"
 		size="40" label="COM_RESERVA_FIELD_PRECIO_LABEL"
 		description="COM_RESERVA_FIELD_PRECIO_DESC" />
+		
+		<field name="items" type="itemsselect"
+			label="List of items"
+			required="true" />
 	</fieldset>
 </form>

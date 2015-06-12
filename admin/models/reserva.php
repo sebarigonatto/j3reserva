@@ -53,8 +53,6 @@ class ReservaModelReserva extends JModelAdmin
 	 */
 	protected function prepareTable($table)
 	{
-	//VER POR QUE NO ANDA ESTO: PAG 129
-	//title debería ser una columna de la tabla esta!!!
 		//$table->title = htmlspecialchars_decode($table->title, ENT_QUOTES);
 	}
 	
