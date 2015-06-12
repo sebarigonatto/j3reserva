@@ -4,9 +4,10 @@
  */
 defined('_JEXEC') or die;
 JFormHelper::addFieldPath(JPATH_COMPONENT . '/models/fields');
+/*
 $items = JFormHelper::loadFieldType('itemsselect', false);
 $itemsOptions=$items->getOptions();
-
+*/
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_reserva&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 	<div class="row-fluid">
