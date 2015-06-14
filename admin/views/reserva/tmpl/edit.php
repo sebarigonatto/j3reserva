@@ -3,10 +3,11 @@
  * Es el layout de la vista para editar
  */
 defined('_JEXEC') or die;
+/*
 JFormHelper::addFieldPath(JPATH_COMPONENT . '/models/fields');
 $items = JFormHelper::loadFieldType('itemsselect', false);
 $itemsOptions=$items->getOptions();
-
+*/
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_reserva&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 	<div class="row-fluid">
@@ -24,22 +25,13 @@ $itemsOptions=$items->getOptions();
 					<div class="controls"> <?php echo $this->form->getInput('evento_id'); ?> </div>
 				</div>
 				<div class="control-group">
-					<div class="control-label"> <?php echo $this->form->getLabel('item_id'); ?> </div>
-					<div class="controls"> <?php echo $this->form->getInput('item_id'); ?> </div>
+					<div class="control-label"> <?php echo $this->form->getLabel('items_checkboxes'); ?> </div>
+					<?php echo $this->form->getInput('items_checkboxes'); ?>
 				</div>
 				<div class="control-group">
 					<div class="control-label"> <?php echo $this->form->getLabel('precio'); ?> </div>
 					<div class="controls"> <?php echo $this->form->getInput('precio'); ?> </div>
 				</div>
-				<div class="combo-items">
-					<select name="filter_type" class="inputbox">
-						<option value=""> - Select Items - </option>
-						<?php echo JHtml::_('select.options', $itemsOptions, 'value', 'text');?>
-					</select>
-                                </div>
-                                <div class="control-group">
-                                     <?php echo $this->form->getInput('items_checkboxes'); ?>
-                                </div>
 				<?php echo JHtml::_('bootstrap.endPanel'); ?>
 				<input type="hidden" name="task" value="" />
 				<?php echo JHtml::_('form.token'); ?>

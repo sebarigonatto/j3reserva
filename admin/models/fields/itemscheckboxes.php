@@ -15,7 +15,7 @@ class JFormFieldItemsCheckBoxes extends JFormField
    protected function getInput()
    {
       //Get form details
-      $db =& JFactory::getDBO();
+      $db = JFactory::getDBO();
       $query = $db->getQuery(true);
       $query->select('a.id As value, CONCAT(a.nombre, " $", CAST(a.costo AS CHAR)) As text');
       $query->from($db->quoteName('#__reserva_item').' AS a');

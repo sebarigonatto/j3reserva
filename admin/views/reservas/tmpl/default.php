@@ -16,45 +16,56 @@ $listDirn = '';
 						onclick="Joomla.checkAll(this)" />
 					</th>
 					<th class="title"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_TITULO','a.titulo', $listDirn, $listOrder); ?></th>
+					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_DESCRIPCION', 'a.descripcion', $listDirn, $listOrder); ?></th>
 					<th width="1%" class="nowrap center "><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_INICIO', 'a.inicio', $listDirn, $listOrder); ?></th>
 					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_FIN', 'a.fin', $listDirn, $listOrder); ?></th>
 					<th width="1%" class="nowrap center "><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_LUGAR', 'a.lugar', $listDirn, $listOrder); ?></th>
-					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_DESCRIPCION', 'a.descripcion', $listDirn, $listOrder); ?></th>
+					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_ITEMS', 'c.nombre', $listDirn, $listOrder); ?></th>
 					<th width="1%" class="nowrap center "><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_TEL', 'a.tel', $listDirn, $listOrder); ?></th>
 					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_MAIL', 'a.mail', $listDirn, $listOrder); ?></th>
 				</tr>
 			</thead>
 			<tbody>
 			<!--  agrega los items obtenidos del modelo a cada fila -->
-				<?php foreach ($this->items as $i => $item) :?>
-				<tr class="row<?php echo $i % 2; ?>">
-					<td class="center hidden-phone">
-						<?php echo JHtml::_('grid.id', $i, $item->id); ?>
-					</td>
-					<td class="nowrap has-context">
-						<a href="<?php echo JRoute::_('index.php?option=com_reserva&task=reserva.edit&id='.(int) $item->id); ?>">
-							<?php echo $this->escape($item->titulo); ?></a>
-					</td>
-					<td class="nowrap has-context ">
-						<?php echo $this->escape($item->inicio); ?>
-					</td>
-					<td class="nowrap has-context center hidden-phone">
-						<?php echo $this->escape($item->fin); ?>
-					</td>
-					<td class="nowrap has-context">
-						<?php echo $this->escape($item->lugar); ?>
-					</td>
-					<td class="nowrap has-context center hidden-phone">
-						<?php echo $this->escape($item->descripcion); ?>
-					</td>
-					<td class="nowrap has-context">
-						<?php echo $this->escape($item->tel); ?>					
-					</td>
-					<td class="nowrap has-context center hidden-phone">
-						<?php echo $this->escape($item->mail); ?>
-					</td>                
-				</tr>
-				<?php endforeach; ?>
+				<?php
+				$i = 0;
+				$len = count($this->items);
+				while ($i < $len) {
+				$item = $this->items[$i]?>
+					<tr class="row<?php echo $i % 2; ?>">
+						<td class="center hidden-phone">
+							<?php echo JHtml::_('grid.id', $i, $item->id); ?>
+						</td>
+						<td class="nowrap has-context">
+							<a href="<?php echo JRoute::_('index.php?option=com_reserva&task=reserva.edit&id='.(int) $item->id); ?>">
+								<?php echo $this->escape($item->titulo); ?></a>
+						</td>
+						<td class="nowrap has-context">
+							<?php echo $this->escape($item->descripcion); ?>
+						</td>
+						<td class="nowrap has-context ">
+							<?php echo $this->escape($item->inicio); ?>
+						</td>
+						<td class="nowrap has-context center hidden-phone">
+							<?php echo $this->escape($item->fin); ?>
+						</td>
+						<td class="nowrap has-context">
+							<?php echo $this->escape($item->lugar); ?>
+						</td>
+						<td>
+						<?php $eventoActual = $item->evento_id;
+						while (($i < $len) && ($eventoActual == $this->items[$i]->evento_id)) { 
+							echo $this->escape($this->items[$i]->nombre); ?> </br>
+						<?php $i = $i+1;} $i = $i-1; ?>
+						</td>
+						<td class="nowrap has-context">
+							<?php echo $this->escape($item->tel); ?>					
+						</td>
+						<td class="nowrap has-context center hidden-phone">
+							<?php echo $this->escape($item->mail); ?>
+						</td>                
+					</tr>
+				<?php $i = $i+1; } ?>
 			</tbody>
 		</table>
 
