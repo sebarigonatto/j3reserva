@@ -15,9 +15,13 @@ class ReservaTableItem extends JTable
      * @return type
      */
     public function bind($array, $ignore = '')
-    {
-            return parent::bind($array, $ignore);
-    }
+   {//deberia redefinirse para guardar la lista de los checkbox
+   // ver si usar id en form xml en vez de value
+      if (isset($array['items_checkboxes']) && is_array($array['items_checkboxes'])) {
+         $array['items_checkboxes'] = implode(',', $array['items_checkboxes']);
+      }
+      return parent::bind($array, $ignore);
+   }
 
 	/**
 	 * Escribe los datos en la base de datos al entregar el formulario

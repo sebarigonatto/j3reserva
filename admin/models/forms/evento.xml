@@ -30,7 +30,10 @@
 
 		<field name="mail" type="email" class="inputbox" 
 			size="30" description="COM_RESERVA_FIELD_MAIL_DESC" label="JGLOBAL_EMAIL" required="true" validate="email"/>
-
+                
+                 <field name="items_checkboxes" type="ItemsCheckBoxes" class="inputbox"  
+                        description="COM_RESERVA_FIELD_ITEMS_DESC" label="COM_RESERVA_FIELD_ITEMS" required="true" />
+           
 		<field name="state" type="list"
 			label="JSTATUS" description="JFIELD_PUBLISHED_DESC"
 			class="inputbox small" size="1" default="1" >		
