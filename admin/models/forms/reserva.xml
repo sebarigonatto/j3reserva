@@ -16,6 +16,6 @@
 		<field name="items_checkboxes" type="ItemsCheckBoxes" required="true"
 		multiple="true"
 		label="COM_RESERVA_FIELD_CHECKBOXESITEMS_LABEL"
-		description="COM_RESERVA_FIELD_CHECKBOXESITEMS_DESC"		/>
+		description="COM_RESERVA_FIELD_CHECKBOXESITEMS_DESC"/>
 	</fieldset>
 </form>

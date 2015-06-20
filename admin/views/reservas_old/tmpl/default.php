@@ -15,14 +15,14 @@ $listDirn = '';
 						titulo="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" 
 						onclick="Joomla.checkAll(this)" />
 					</th>
-					<th class="title"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_TITULO','evento_titulo', $listDirn, $listOrder); ?></th>
-					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_DESCRIPCION', 'evento_descripcion', $listDirn, $listOrder); ?></th>
-					<th width="1%" class="nowrap center "><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_INICIO', 'evento_inicio', $listDirn, $listOrder); ?></th>
-					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_FIN', 'evento_fin', $listDirn, $listOrder); ?></th>
-					<th width="1%" class="nowrap center "><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_LUGAR', 'lugar', $listDirn, $listOrder); ?></th>
-					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_ITEMS', '', $listDirn, $listOrder); ?></th>
-					<th width="1%" class="nowrap center "><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_TEL', 'tel', $listDirn, $listOrder); ?></th>
-					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_MAIL', 'mail', $listDirn, $listOrder); ?></th>
+					<th class="title"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_TITULO','a.titulo', $listDirn, $listOrder); ?></th>
+					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_DESCRIPCION', 'a.descripcion', $listDirn, $listOrder); ?></th>
+					<th width="1%" class="nowrap center "><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_INICIO', 'a.inicio', $listDirn, $listOrder); ?></th>
+					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_FIN', 'a.fin', $listDirn, $listOrder); ?></th>
+					<th width="1%" class="nowrap center "><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_LUGAR', 'a.lugar', $listDirn, $listOrder); ?></th>
+					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_ITEMS', 'c.nombre', $listDirn, $listOrder); ?></th>
+					<th width="1%" class="nowrap center "><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_TEL', 'a.tel', $listDirn, $listOrder); ?></th>
+					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_MAIL', 'a.mail', $listDirn, $listOrder); ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -34,20 +34,20 @@ $listDirn = '';
 				$item = $this->items[$i]?>
 					<tr class="row<?php echo $i % 2; ?>">
 						<td class="center hidden-phone">
-							<?php echo JHtml::_('grid.id', $i, $item->evento_id); ?>
+							<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 						</td>
 						<td class="nowrap has-context">
-							<a href="<?php echo JRoute::_('index.php?option=com_reserva&task=evento.edit&id='.(int) $item->evento_id); ?>">
-								<?php echo $this->escape($item->evento_titulo); ?></a>
+							<a href="<?php echo JRoute::_('index.php?option=com_reserva&task=reserva.edit&id='.(int) $item->id); ?>">
+								<?php echo $this->escape($item->titulo); ?></a>
 						</td>
 						<td class="nowrap has-context">
-							<?php echo $this->escape($item->evento_descripcion); ?>
+							<?php echo $this->escape($item->descripcion); ?>
 						</td>
 						<td class="nowrap has-context ">
-							<?php echo $this->escape($item->evento_inicio); ?>
+							<?php echo $this->escape($item->inicio); ?>
 						</td>
 						<td class="nowrap has-context center hidden-phone">
-							<?php echo $this->escape($item->evento_fin); ?>
+							<?php echo $this->escape($item->fin); ?>
 						</td>
 						<td class="nowrap has-context">
 							<?php echo $this->escape($item->lugar); ?>
@@ -55,7 +55,7 @@ $listDirn = '';
 						<td>
 						<?php $eventoActual = $item->evento_id;
 						while (($i < $len) && ($eventoActual == $this->items[$i]->evento_id)) { 
-							echo $this->escape($this->items[$i]->item_nombre); ?> </br>
+							echo $this->escape($this->items[$i]->nombre); ?> </br>
 						<?php $i = $i+1;} $i = $i-1; ?>
 						</td>
 						<td class="nowrap has-context">

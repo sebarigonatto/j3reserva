@@ -4,7 +4,7 @@
  */
 
 defined('_JEXEC') or die;
-class ReservaViewEvento extends JViewLegacy
+class ReservaViewReserva extends JViewLegacy
 {
 	protected $item;
 	protected $form;
@@ -26,14 +26,14 @@ class ReservaViewEvento extends JViewLegacy
 	{
 		JFactory::getApplication()->input->set('hidemainmenu', true);
 		JToolbarHelper::title(JText::_('COM_RESERVA_MANAGER_RESERVA'), '');
-		JToolbarHelper::save('evento.save');
+		JToolbarHelper::save('reserva.save');
 		if (empty($this->item->id))
 		{
-			JToolbarHelper::cancel('evento.cancel');
+			JToolbarHelper::cancel('reserva.cancel');
 		}
 		else
 		{
-			JToolbarHelper::cancel('evento.cancel', 'JTOOLBAR_CLOSE');
+			JToolbarHelper::cancel('reserva.cancel', 'JTOOLBAR_CLOSE');
 		}
 	}
 }

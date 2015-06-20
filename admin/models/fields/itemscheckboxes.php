@@ -22,9 +22,27 @@ class JFormFieldItemsCheckBoxes extends JFormField
       $db->setQuery($query);
       $items = $db->loadObjectList();
       $var_list ='';
+	// print_r($this->value);
       foreach($items as $item){
-         $var_list.= '<input name="'.$this->name.'" type="checkbox" value="'.$item->value.'">'.$item->text.'<br />';
+		$checked = $this->getValues($item->value);
+         $var_list.= '<input name="'.$this->name.'" ' . $checked . 'type="checkbox" value="'.$item->value.'">'.$item->text.'<br />';
       }
       return $var_list;
    }
+   
+   protected function getValues($itemsid) {
+		$itemsid = (int) $itemsid;
+		$checked='';
+		foreach ($this-> value as $values)
+		{
+			if ($itemsid == $values)
+			{
+				$checked = 'checked = "checked"';
+			}
+
+		}
+		return $checked;
+	}
+  
+
 }
