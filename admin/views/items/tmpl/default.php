@@ -4,7 +4,12 @@
     $listOrder = '';
     $listDirn = '';
 ?>
-
+<div id="j-sidebar-container" class="span2">
+    <?php
+        echo $this->sidebar; 
+        /*muestra la barra de sub_menu del archivo /helpers/reserva.php */
+    ?>
+</div>
 <form action="<?php echo JRoute::_('index.php?option=com_reserva&view=items'); ?>" method="post" name="adminForm" id="adminForm">
     <div id="j-main-container" class="span10">
 		<div class="clearfix"> </div>

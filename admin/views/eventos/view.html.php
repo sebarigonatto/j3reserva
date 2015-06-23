@@ -23,14 +23,19 @@ class ReservaViewEventos extends JViewLegacy
 			JError::raiseError(500, implode("\n", $errors));
 			return false;
 		}
+                
+                
 		$this->addToolbar();
-		//barra de busqueda y fitro
+		// requerido para mostrar la barra de submenu variable mostrada /tmpl/default.php
+                $this->sidebar = JHtmlSidebar::render();
 		parent::display($tpl);
 	}
 
 	// Agrega los botones arriba de la vista [New, Edit, Options]
 	protected function addToolbar()
-	{
+	{       /*muestra la barra de sub_menu del archivo /helpers/reserva.php */
+                ReservaHelper::addSubmenu('eventos');
+                
 		$canDo = ReservaHelper::getActions(); // Extrae los permisos del usuario actual
 		$bar = JToolBar::getInstance('toolbar');
 		JToolbarHelper::title(JText::_('COM_RESERVA_MANAGER_EVENTOS'), '');

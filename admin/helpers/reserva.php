@@ -35,16 +35,18 @@ class ReservaHelper
 	* esta funcion crea un link a la vista por defecto reservas(vista de lista)
 	* y  link a la vista de categorias
 	*/
-	public static function addSubmenu($vName = 'reservas')
+	public static function addSubmenu($vName = 'eventos')
 	{
-		JHtmlSidebar::addEntry(
+		/*JHtmlSidebar::addEntry(
 		JText::_('COM_RESERVA_SUBMENU_RESERVAS'),
 		'index.php?option=com_reserva&view=reservas',
 		$vName == 'reservas'
 		);
+                */
+            
 		JHtmlSidebar::addEntry(
 		JText::_('COM_RESERVA_SUBMENU_EVENTOS'),
-		'index.php?option=com_categories&extension=com_reserva',
+		'index.php?option=com_reserva&view=eventos',
 		$vName == 'eventos'
 		);
 			
