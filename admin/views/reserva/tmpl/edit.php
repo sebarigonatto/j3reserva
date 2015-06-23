@@ -5,6 +5,7 @@
 defined('_JEXEC') or die;
 /*
 JFormHelper::addFieldPath(JPATH_COMPONENT . '/models/fields');
+/*
 $items = JFormHelper::loadFieldType('itemsselect', false);
 $itemsOptions=$items->getOptions();
 */
