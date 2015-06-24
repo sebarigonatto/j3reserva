@@ -18,7 +18,7 @@ public function __construct($config = array())
         $config['filter_fields'] = array(
         'id', 'a.id',
         'nombre', 'a.nombre',
-        'imagen','a.img',    
+        'img','a.img',    
         'descripcion','a.descripcion',
         'costo','a.costo',    
         );

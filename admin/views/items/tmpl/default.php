@@ -29,7 +29,7 @@
 					
 					<th class="imagen">
 					<?php echo JHtml::_('grid.sort', 'COM_RESERVA_IMAGEN', 
-					'a.imagen', $listDirn, $listOrder); ?>
+					'a.img', $listDirn, $listOrder); ?>
 					</th>
 					
 					<th class="descripcion hidden-phone">

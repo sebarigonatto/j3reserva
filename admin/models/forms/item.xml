@@ -9,7 +9,7 @@
 			   size="40" label="COM_RESERVA_FIELD_NOMBRE_LABEL" 
 			   description="COM_RESERVA_FIELD_NOMBRE_DESC" required="true" />
 
-		<field name="imagen" type="media" directory="/images" 
+		<field name="img" type="media" directory="/images" 
 			   hide_none="1" label="COM_RESERVA_FIELD_IMAGEN_LABEL"
 			   size="40" description="COM_RESERVA_FIELD_IMAGEN_DESC" />
 
