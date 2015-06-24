@@ -44,6 +44,7 @@ class ReservaModelEvento extends JModelAdmin
 			$data = $this->getItem();
 		
 		}
+                //carga $this->value en item_chekboxes field
 			$data->items_checkboxes=$this->getEventosItemlist();
 		return $data;
 	}
@@ -71,6 +72,7 @@ class ReservaModelEvento extends JModelAdmin
 	protected function prepareTable($table)
 	{
 		//$table->title = htmlspecialchars_decode($table->title, ENT_QUOTES);
+		
 	}
 	
 	
@@ -116,6 +118,7 @@ class ReservaModelEvento extends JModelAdmin
 			return parent::canEditState($record);
 		}
 	}
+	
 	
 	public function save($data)//***************************************************** ver esta función
 	{	

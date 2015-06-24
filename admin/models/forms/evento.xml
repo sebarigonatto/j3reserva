@@ -16,14 +16,18 @@
 		<field name="lugar" type="text" class="inputbox" 
 			size="50" label="COM_RESERVA_FIELD_LUGAR_LABEL" 
 			description="COM_RESERVA_FIELD_LUGAR_DESC" required="true" />
-			
+		<!--	
 		<field name="inicio" type="calendar" class="inputbox"
 			label="COM_RESERVA_FIELD_INICIO_LABEL" description="COM_RESERVA_FIELD_INICIO_DESC" 
-			size="22" format="%Y-%m-%d %H:%M:%S" filter="user_utc" />
-
-		<field name="fin" type="calendar"  class="inputbox"
+			size="22" format="%Y-%m-%d HH" filter="user_utc" multiple ="true"/>
+		-->
+		<field name="inicio" type="DateTime"  class="inputbox"
 			label="COM_RESERVA_FIELD_FIN_LABEL" description="COM_RESERVA_FIELD_FIN_DESC"
-			size="22" format="%Y-%m-%d %H:%M:%S" filter="user_utc" />
+			size="22" format="%Y-%m-%d" filter="user_utc" />
+			
+		<field name="fin" type="DateTime"  class="inputbox"
+			label="COM_RESERVA_FIELD_FIN_LABEL" description="COM_RESERVA_FIELD_FIN_DESC"
+			size="22" format="%Y-%m-%d" filter="user_utc" />
 
 		<field name="items_checkboxes" type="ItemsCheckBoxes" required="true"
 			multiple="true"
@@ -38,10 +42,14 @@
 
 		<field name="mail" type="email" class="inputbox" 
 			size="30" description="COM_RESERVA_FIELD_MAIL_DESC" label="JGLOBAL_EMAIL" required="true" validate="email"/>
-                
-                 <field name="items_checkboxes" type="ItemsCheckBoxes" class="inputbox"  
-                        description="COM_RESERVA_FIELD_ITEMS_DESC" label="COM_RESERVA_FIELD_ITEMS" required="true" />
-           
+
+
+       
+
+
+
+
+		
 		<field name="state" type="list"
 			label="JSTATUS" description="JFIELD_PUBLISHED_DESC"
 			class="inputbox small" size="1" default="1" >		

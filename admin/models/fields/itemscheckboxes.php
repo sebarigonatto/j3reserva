@@ -22,7 +22,7 @@ class JFormFieldItemsCheckBoxes extends JFormField
       $db->setQuery($query);
       $items = $db->loadObjectList();
       $var_list ='';
-	// print_r($this->value);
+	 //var_dump( $this);
       foreach($items as $item){
 		$checked = $this->getValues($item->value);
          $var_list.= '<input name="'.$this->name.'" ' . $checked . 'type="checkbox" value="'.$item->value.'">'.$item->text.'<br />';
@@ -33,7 +33,7 @@ class JFormFieldItemsCheckBoxes extends JFormField
    protected function getValues($itemsid) {
 		$itemsid = (int) $itemsid;
 		$checked='';
-		foreach ($this-> value as $values)
+		foreach ($this->value as $values)
 		{
 			if ($itemsid == $values)
 			{
@@ -44,5 +44,7 @@ class JFormFieldItemsCheckBoxes extends JFormField
 		return $checked;
 	}
   
+  
 
 }
+
