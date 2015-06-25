@@ -25,14 +25,14 @@ class ReservaViewItems extends JViewLegacy
 		}
 		$this->addToolbar();
 		// requerido para mostrar la barra de submenu variable mostrada /tmpl/default.php
-                $this->sidebar = JHtmlSidebar::render();
+		$this->sidebar = JHtmlSidebar::render();
 		parent::display($tpl);
 	}
 
 	// Agrega los botones arriba de la vista [New, Edit, Options]
 	protected function addToolbar()
 	{       /*muestra la barra de sub_menu del archivo /helpers/reserva.php */
-                ReservaHelper::addSubmenu('items');
+		ReservaHelper::addSubmenu('items');
             
 		$canDo = ReservaHelper::getActions(); // Extrae los permisos del usuario actual
 		$bar = JToolBar::getInstance('toolbar');

@@ -4,7 +4,14 @@ defined('_JEXEC') or die;
 $listOrder = '';
 $listDirn = '';
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_reserva&view=reservas'); ?>" method="post" name="adminForm" id="adminForm">
+<div id="j-sidebar-container" class="span2">
+    <?php
+        echo $this->sidebar; 
+        /*muestra la barra de sub_menu del archivo /helpers/reserva.php */
+    ?>
+</div>
+<div id="j-main-container" class="span10">
+<form action="<?php echo JRoute::_('index.php?option=com_reserva&view=eventos'); ?>" method="post" name="adminForm" id="adminForm">
 	<div id="j-main-container" class="span10">
 		<div class="clearfix"> </div>
 		<table class="table table-striped" id="reservaList">

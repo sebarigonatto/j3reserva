@@ -34,7 +34,7 @@ class ReservaViewEventos extends JViewLegacy
 	// Agrega los botones arriba de la vista [New, Edit, Options]
 	protected function addToolbar()
 	{       /*muestra la barra de sub_menu del archivo /helpers/reserva.php */
-                ReservaHelper::addSubmenu('eventos');
+		ReservaHelper::addSubmenu('eventos');
                 
 		$canDo = ReservaHelper::getActions(); // Extrae los permisos del usuario actual
 		$bar = JToolBar::getInstance('toolbar');
