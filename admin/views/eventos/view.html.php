@@ -11,7 +11,6 @@ class ReservaViewEventos extends JViewLegacy
 	protected $items; //items obtenidos del archivo de modelo /models/eventos.php
 	protected $state;//permite saber cual es columna ordenar y la direccion  
 	protected $pagination;//paginación de items
-
 	public function display($tpl = null)
 	{
 		$this->items = $this->get('Items');
@@ -30,7 +29,6 @@ class ReservaViewEventos extends JViewLegacy
                 $this->sidebar = JHtmlSidebar::render();
 		parent::display($tpl);
 	}
-
 	// Agrega los botones arriba de la vista [New, Edit, Options]
 	protected function addToolbar()
 	{       /*muestra la barra de sub_menu del archivo /helpers/reserva.php */
@@ -45,7 +43,7 @@ class ReservaViewEventos extends JViewLegacy
 		{
 			JToolbarHelper::editList('evento.edit');
 		}
-		
+		/*
 		if ($canDo->get('core.edit.state')) 
 		{
 			JToolbarHelper::publish('eventos.publish', 'JTOOLBAR_PUBLISH',true);
@@ -53,7 +51,7 @@ class ReservaViewEventos extends JViewLegacy
 			JToolbarHelper::archiveList('eventos.archive');
 			JToolbarHelper::checkin('eventos.checkin');
 		}
-		
+		*/
 		//agregar filtro a la vista para búsqueda
 		JHtmlSidebar::setAction('index.php?option=com_reserva&view=eventos');
 		JHtmlSidebar::addFilter(JText::_('JOPTION_SELECT_PUBLISHED'),'filter_state',

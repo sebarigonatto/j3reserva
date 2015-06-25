@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
 	<fieldset name="eventofields">
-		<!--field name="evento_id" type="text" class="readonly" 
+		<field name="id" type="text" class="readonly" 
 			label="JGLOBAL_FIELD_ID_LABEL" readonly="true" 
-			description="JGLOBAL_FIELD_ID_DESC"/-->
+			description="JGLOBAL_FIELD_ID_DESC"/>
 
 		<field name="titulo" type="text" class="inputbox" 
 			size="40" label="COM_RESERVA_FIELD_TITULO_LABEL" 
