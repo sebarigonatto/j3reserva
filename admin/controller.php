@@ -19,11 +19,11 @@ class ReservaController extends JControllerLegacy
 		$layout = $this->input->get('layout', 'default');
 		$id = $this->input->getInt('id');
 		//Chequea error: por si intentan aceder con la url directamente
-		if ($view == 'evento' && $layout == 'edit' && !$this->checkEditId('com_reserva.edit.reserva', $id))
+		if ($view == 'evento' && $layout == 'edit' && !$this->checkEditId('com_reserva.edit.evento', $id))
 		{
 			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
 			$this->setMessage($this->getError(), 'error');
-			$this->setRedirect(JRoute::_('index.php?option=com_reserva&view=reservas', false));
+			$this->setRedirect(JRoute::_('index.php?option=com_reserva&view=eventos', false));
 			return false;
 		}
 		parent::display();
