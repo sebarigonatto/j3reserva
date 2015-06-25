@@ -25,6 +25,10 @@ class ReservaViewReservas extends JViewLegacy
 		}
 		$this->addToolbar();
 		//barra de busqueda y fitro
+                
+                //agrega un sub menu de vavegacion entre vista
+                ReservaHelper::addSubmenu('eventos');
+                
 		parent::display($tpl);
 	}
 

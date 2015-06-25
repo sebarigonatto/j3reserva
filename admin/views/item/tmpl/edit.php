@@ -16,8 +16,8 @@ defined('_JEXEC') or die;
 					<div class="controls"><?php echo $this->form->getInput('nombre'); ?></div>
 				</div>
 				<div class="control-group">
-						<div class="control-label"><?php echo $this->form->getLabel('imagen'); ?></div>
-						<div class="controls"><?php echo $this->form->getInput('imagen'); ?></div>
+						<div class="control-label"><?php echo $this->form->getLabel('img'); ?></div>
+						<div class="controls"><?php echo $this->form->getInput('img'); ?></div>
 				</div>
 				<div class="control-group">
 						<div class="control-label"><?php echo $this->form->getLabel('descripcion'); ?></div>

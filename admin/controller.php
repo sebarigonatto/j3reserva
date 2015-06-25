@@ -3,19 +3,23 @@
 defined('_JEXEC') or die;
 class ReservaController extends JControllerLegacy
 {
-	protected $default_view = 'reservas'; //se define el default si el nombre de la vista a mostrar no coincide con el nombre del componente
+	protected $default_view = 'eventos'; //se define el default si el nombre de la vista a mostrar no coincide con el nombre del componente
 	
-	//Esta función es la default, si no se especifica una tarea
+	//Esta funciï¿½n es la default, si no se especifica una tarea
 	public function display($cachable = false, $urlparams = false)
 	{
-		//Se incluye código del helper, para luego chequear que el usuario tenga permiso para realizar una tarea
-		require_once JPATH_COMPONENT.'/helpers/reserva.php';
-		//Se especifica la vista y el layout
-		$view = $this->input->get('view', 'reserva');
+		/*
+                 * Se incluye codigo del helper, para luego chequear que el usuario tenga permiso
+                 *  para realizar una tarea y agregar submenus
+                 */
+                require_once JPATH_COMPONENT.'/helpers/reserva.php';
+		
+                //Se especifica la vista y el layout
+		$view = $this->input->get('view', 'evento');
 		$layout = $this->input->get('layout', 'default');
 		$id = $this->input->getInt('id');
 		//Chequea error: por si intentan aceder con la url directamente
-		if ($view == 'reserva' && $layout == 'edit' && !$this->checkEditId('com_reserva.edit.reserva', $id))
+		if ($view == 'evento' && $layout == 'edit' && !$this->checkEditId('com_reserva.edit.reserva', $id))
 		{
 			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
 			$this->setMessage($this->getError(), 'error');
