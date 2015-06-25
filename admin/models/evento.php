@@ -35,35 +35,31 @@ class ReservaModelEvento extends JModelAdmin
 		return $form;
 	}
 	
-	// Carga los datos en el formulario
+	// Carga los datos en el formulario. En $data estás los datos de la BD, se le agrega el campo item_checkboxes
 	protected function loadFormData()
 	{
 		$data = JFactory::getApplication()->getUserState('com_reserva.edit.evento.data', array());
 		if (empty($data))
 		{
 			$data = $this->getItem();
-		
 		}
-                //carga $this->value en item_chekboxes field
-			$data->items_checkboxes=$this->getEventosItemlist();
+		$data->items_checkboxes=$this->getEventosItemlist();
 		return $data;
 	}
 	
 	protected function getEventosItemlist()
-	{//darle el tilde a los checkboxes
+	{// Se pone el check los items seleccionados
 		if (empty( $this->_itemslist )) {
 			$db = $this->getDbo();
 			$query = $db->getQuery(true);
-                        $query->select('r.item_id');
+			$query->select('r.item_id');
 			$query->from('#__reserva_evento AS e');
-                        $query->innerjoin('#__reserva_reserva AS r ON r.evento_id = e.id');
-                        $query->where('e.id = '.(int) $this->getItem()->id);
-			             $db->setQuery($query);
-                        $this->_itemslist = $db->loadColumn();
-                }
-
-                return $this->_itemslist;
-	
+			$query->innerjoin('#__reserva_reserva AS r ON r.evento_id = e.id');
+			$query->where('e.id = '.(int) $this->getItem()->id);
+			$db->setQuery($query);
+			$this->_itemslist = $db->loadColumn();
+		}
+		return $this->_itemslist;
 	}
 	/**
 	 * Transforma algunos datos antes de que sean mostrados
@@ -72,7 +68,6 @@ class ReservaModelEvento extends JModelAdmin
 	protected function prepareTable($table)
 	{
 		//$table->title = htmlspecialchars_decode($table->title, ENT_QUOTES);
-		
 	}
 	
 	
@@ -119,49 +114,75 @@ class ReservaModelEvento extends JModelAdmin
 		}
 	}
 	
-	
-	public function save($data)//***************************************************** ver esta función
+	public function save($data)
 	{	
-		$dispatcher = JDispatcher::getInstance();
-		$table = $this->getTable();
-		$key = $table->getKeyName();
-		$pk = (!empty($data[$key])) ? $data[$key] : (int)$this->getState($this->getName().'.id');
-		$isNew = true;
 		
 		$table_reserva = $this->getTable('Reserva', 'ReservaTable', array());
 		$table_evento = $this->getTable('Evento', 'ReservaTable', array());
 		
+		$isNew = false;
 		
+		if ($data['id'] == 0){
+			$isNew = true;
+		}
+		
+		// Primero insertar el evento
 		if (!$table_evento->bind($data))
 		{
 			$this->setError(JText::sprintf('EVENTO BIND FAILED', $user->getError()));
 			return false;
 		}
-		//$id_evento = $table_evento->save($data);
 		if (!$table_evento->save($data))
 		{
 			$this->setError($user->getError());
 			return false;
 		}
 		
-		$data['evento_id'] = (int) $table_evento->id;
+		// Obtener los items nuevos y los existentes
+		//$itemsReserva = array();
+		if (isset($data['items_checkboxes'])){
+			$itemsReserva = $data['items_checkboxes'];
+		} else {
+			$itemsReserva = array();
+		}
 		
-		$itemsReserva = $data['items_checkboxes'];
+		// Chequear si el evento editado es nuevo o se está modificando
+		//$itemsExistentes = array();
+		if ($isNew) {
+			$data['evento_id'] = (int) $table_evento->id;
+			$itemsExistentes = array();
+		}
+		else {
+			$data['evento_id'] = $data['id'];
+			$itemsExistentes = $this->getItemsForEvent($data['id']);
+		}
+		
 		unset($data['items_checkboxes']);
 		$data['id'] = '';
 		
-		$len = count($itemsReserva);
+		$insertarItems = array_diff($itemsReserva, $itemsExistentes);
+		$borrarItems = array_diff($itemsExistentes, $itemsReserva);
 		
+		$this->deleteItems($data['evento_id'], $borrarItems);
+		$this->insertItems($table_reserva, $data, $insertarItems);
+		
+		return true;
+	}
+	
+	protected function insertItems($table_reserva, $data, $items){
 		// Bind the data.
 		if (!$table_reserva->bind($data))
 		{
 			$this->setError(JText::sprintf('RESERVA BIND FAILED', $user->getError()));
 			return false;
 		}
-			
- 		for($i=0; $i<$len; $i++)
+		
+		$len = count($items);
+		
+ 		//for($i=0; $i<$len; $i++)
+		foreach ($items as $item)
 		{
-			$data['item_id'] = $itemsReserva[$i];
+			$data['item_id'] = $item;
 			
 			// Store the data.
 			if (!$table_reserva->save($data))
@@ -170,7 +191,46 @@ class ReservaModelEvento extends JModelAdmin
 				return false;
 			}
 		}
+	}
+	
+	protected function deleteItems($evento_id, $items){		
+		$len = count($items);
+		
+		$db = &JFactory::getDBO();
+ 
+ 		//for($i=0; $i<$len; $i++)
+		foreach ($items as $item)
+		{
+			$query = $db->getQuery(true);
+			$query->delete($db->quoteName('#__reserva_reserva'));
+			$query->where($db->quoteName('evento_id') . '=' . $evento_id, 'AND');
+			$query->where($db->quoteName('item_id') . '=' . $item);
+			$db->setQuery($query);
+			$db->query();
+		}
 		return true;
+	}
+	
+	protected function getItemsForEvent($evento_id){
+		$db =&JFactory::getDBO();
+		$query = $db->getQuery(true);
+		$query->select('item_id');
+		$query->from('#__reserva_reserva'); 
+		$query->where($db->quoteName('evento_id') . '=' . $evento_id);
+		$db->setQuery($query);
+		if ($db->getErrorNum()) {
+			echo $db->getErrorMsg();
+			exit;
+		}
+		$listaItems = $db->loadObjectList();
+		$listaResultado = array();
+		$len = count($listaItems);
+		
+		for($i=0; $i<$len; $i++){
+			$listaResultado[$i] = $listaItems[$i]->item_id;
+		}
+		
+		return $listaResultado;
 	}
 }
 

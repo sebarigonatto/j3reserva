@@ -7,9 +7,9 @@
 defined('_JEXEC') or die;
 class ReservaControllerEventos extends JControllerAdmin
 {
-	public function getModel($name = 'Evento', $prefix = 'ReservaModel', $config = array('ignore_request' => true))
-	{
-		$model = parent::getModel($name, $prefix, $config);
-		return $model;
-	}
+    public function getModel($name = 'Evento', $prefix = 'ReservaModel', $config = array('ignore_request' => true))
+    {
+        $model = parent::getModel($name, $prefix, $config);
+        return $model;
+    }
 }

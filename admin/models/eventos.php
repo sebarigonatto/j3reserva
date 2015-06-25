@@ -44,7 +44,8 @@ class ReservaModelEventos extends JModelList
 				  INNER JOIN az94y_items ON az94y_eventos_items.items_id = az94y_items.id
 		  
 		 */
-		$query->select(array('a.precio AS precio_total', 'a.id AS reserva_id', 'a.evento_id AS evento_id', 'a.item_id AS item_id', 
+		$query->select(array('a.precio AS precio_total', 'a.id AS reserva_id', 
+					'b.id AS evento_id', 'c.id AS item_id', 
 					'b.titulo AS evento_titulo', 'b.descripcion AS evento_descripcion', 'b.inicio AS evento_inicio', 'b.fin AS evento_fin',
 					'b.lugar AS lugar','b.tel AS tel','b.mail AS mail',
 					'c.descripcion AS item_descripcion', 'c.img AS imagen', 'c.costo AS item_costo', 'c.nombre AS item_nombre'))

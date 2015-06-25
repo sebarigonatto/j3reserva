@@ -29,7 +29,7 @@
 			label="COM_RESERVA_FIELD_FIN_LABEL" description="COM_RESERVA_FIELD_FIN_DESC"
 			size="22" format="%Y-%m-%d" filter="user_utc" />
 
-		<field name="items_checkboxes" type="ItemsCheckBoxes" required="true"
+		<field name="items_checkboxes" type="ItemsCheckBoxes"
 			multiple="true"
 			label="COM_RESERVA_FIELD_CHECKBOXESITEMS_LABEL"
 			description="COM_RESERVA_FIELD_CHECKBOXESITEMS_DESC"/>
@@ -42,14 +42,6 @@
 
 		<field name="mail" type="email" class="inputbox" 
 			size="30" description="COM_RESERVA_FIELD_MAIL_DESC" label="JGLOBAL_EMAIL" required="true" validate="email"/>
-
-
-       
-
-
-
-
-		
 		<field name="state" type="list"
 			label="JSTATUS" description="JFIELD_PUBLISHED_DESC"
 			class="inputbox small" size="1" default="1" >		
