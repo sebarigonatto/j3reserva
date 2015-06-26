@@ -80,6 +80,7 @@ class ReservaModelEvento extends JModelAdmin
 	{
 		if (!empty($record->id))
 		{
+			// Si no está en Trash, salir
 			if ($record->state != -2)
 			{
 				return;
