@@ -25,14 +25,14 @@ class ReservaViewItems extends JViewLegacy
 		}
 		$this->addToolbar();
 		// requerido para mostrar la barra de submenu variable mostrada /tmpl/default.php
-                $this->sidebar = JHtmlSidebar::render();
+		$this->sidebar = JHtmlSidebar::render();
 		parent::display($tpl);
 	}
 
 	// Agrega los botones arriba de la vista [New, Edit, Options]
 	protected function addToolbar()
 	{       /*muestra la barra de sub_menu del archivo /helpers/reserva.php */
-                ReservaHelper::addSubmenu('items');
+		ReservaHelper::addSubmenu('items');
             
 		$canDo = ReservaHelper::getActions(); // Extrae los permisos del usuario actual
 		$bar = JToolBar::getInstance('toolbar');
@@ -44,27 +44,30 @@ class ReservaViewItems extends JViewLegacy
 			JToolbarHelper::editList('item.edit');
 		}
 		
-		if ($canDo->get('core.edit.state')) 
+		/*if ($canDo->get('core.edit.state')) 
 		{
 			JToolbarHelper::publish('items.publish', 'JTOOLBAR_PUBLISH',true);
 			JToolbarHelper::unpublish('items.unpublish', 'JTOOLBAR_UNPUBLISH',true);
 			JToolbarHelper::archiveList('items.archive');
 			JToolbarHelper::checkin('items.checkin');
 		}
-		
+		*/
 		//agregar filtro a la vista para búsqueda
-		JHtmlSidebar::setAction('index.php?option=com_reserva&view=items');
+		/*JHtmlSidebar::setAction('index.php?option=com_reserva&view=items');
 		JHtmlSidebar::addFilter(JText::_('JOPTION_SELECT_PUBLISHED'),'filter_state',
 		JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'),'value', 'text', 
 		$this->state->get('filter.state'), true));
+		*/
 		
-		/*
+		
 		if ($canDo->get('core.delete'))
 		{
 			JToolBarHelper::deleteList('', 'items.delete', 'JTOOLBAR_DELETE');
 		}
-		se reemplaza el boton de borrado por envio a la papelera en vez de borrado completamente
-		*/
+		
+		//se reemplaza el boton de borrado por envio a la papelera en vez de borrado completamente
+		
+	/*
 		$state  = $this->get('State');
 		if ($state->get('filter.state') == -2 && $canDo->get('core.delete'))
 		{
@@ -74,7 +77,7 @@ class ReservaViewItems extends JViewLegacy
 		{
 			JToolbarHelper::trash('items.trash');
 		}
-		
+	*/	
 		if ($canDo->get('core.admin'))
 		{
 			JToolbarHelper::preferences('com_reserva');

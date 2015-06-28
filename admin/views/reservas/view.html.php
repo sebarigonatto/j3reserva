@@ -15,8 +15,10 @@ class ReservaViewReservas extends JViewLegacy
 	public function display($tpl = null)
 	{
 		$this->items = $this->get('Items');
-		$this->state = $this->get('State');
-		$this->pagination = $this->get('Pagination');
+		//$this->state = $this->get('State');
+		//$this->pagination = $this->get('Pagination');
+		
+		
 		//agrega los links de submenus a la barra de navegación
 		if (count($errors = $this->get('Errors')))
 		{
@@ -24,27 +26,27 @@ class ReservaViewReservas extends JViewLegacy
 			return false;
 		}
 		$this->addToolbar();
-		//barra de busqueda y fitro
-                
-                //agrega un sub menu de vavegacion entre vista
-                ReservaHelper::addSubmenu('eventos');
+		// requerido para mostrar la barra de submenu variable mostrada /tmpl/default.php
+		$this->sidebar = JHtmlSidebar::render();
                 
 		parent::display($tpl);
 	}
 
 	// Agrega los botones arriba de la vista [New, Edit, Options]
 	protected function addToolbar()
-	{
+	{	//agrega un sub menu de vavegacion entre vista
+                ReservaHelper::addSubmenu('reservas');
 		$canDo = ReservaHelper::getActions(); // Extrae los permisos del usuario actual
 		$bar = JToolBar::getInstance('toolbar');
 		JToolbarHelper::title(JText::_('COM_RESERVA_MANAGER_RESERVAS'), '');
-		JToolbarHelper::addNew('reserva.add');
+	/*	JToolbarHelper::addNew('reserva.add');
 		// Si tiene permisos para editar, se muestra el botón
 		if ($canDo->get('core.edit'))
 		{
 			JToolbarHelper::editList('reserva.edit');
 		}
-		
+	*/
+	/*	
 		if ($canDo->get('core.edit.state')) 
 		{
 			JToolbarHelper::publish('reservas.publish', 'JTOOLBAR_PUBLISH',true);
@@ -52,13 +54,13 @@ class ReservaViewReservas extends JViewLegacy
 			JToolbarHelper::archiveList('reservas.archive');
 			JToolbarHelper::checkin('reservas.checkin');
 		}
-		
+		*/
 		//agregar filtro a la vista para búsqueda
-		JHtmlSidebar::setAction('index.php?option=com_reserva&view=reservas');
+		/*JHtmlSidebar::setAction('index.php?option=com_reserva&view=reservas');
 		JHtmlSidebar::addFilter(JText::_('JOPTION_SELECT_PUBLISHED'),'filter_state',
 		JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'),'value', 'text', 
 		$this->state->get('filter.state'), true));
-		
+		*/
 		/*
 		if ($canDo->get('core.delete'))
 		{
@@ -66,7 +68,7 @@ class ReservaViewReservas extends JViewLegacy
 		}
 		se reemplaza el boton de borrado por envio a la papelera en vez de borrado completamente
 		*/
-		$state  = $this->get('State');
+	/*	$state  = $this->get('State');
 		if ($state->get('filter.state') == -2 && $canDo->get('core.delete'))
 		{
 			JToolbarHelper::deleteList('', 'reservas.delete', 'JTOOLBAR_EMPTY_TRASH');
@@ -80,6 +82,7 @@ class ReservaViewReservas extends JViewLegacy
 		{
 			JToolbarHelper::preferences('com_reserva');
 		}
+		*/
 	}
 	
 	protected function getSortFields()

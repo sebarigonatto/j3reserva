@@ -11,7 +11,6 @@ class ReservaViewEventos extends JViewLegacy
 	protected $items; //items obtenidos del archivo de modelo /models/eventos.php
 	protected $state;//permite saber cual es columna ordenar y la direccion  
 	protected $pagination;//paginación de items
-
 	public function display($tpl = null)
 	{
 		$this->items = $this->get('Items');
@@ -27,14 +26,14 @@ class ReservaViewEventos extends JViewLegacy
                 
 		$this->addToolbar();
 		// requerido para mostrar la barra de submenu variable mostrada /tmpl/default.php
-                $this->sidebar = JHtmlSidebar::render();
+        $this->sidebar = JHtmlSidebar::render();
 		parent::display($tpl);
 	}
-
+	
 	// Agrega los botones arriba de la vista [New, Edit, Options]
 	protected function addToolbar()
 	{       /*muestra la barra de sub_menu del archivo /helpers/reserva.php */
-                ReservaHelper::addSubmenu('eventos');
+		ReservaHelper::addSubmenu('eventos');
                 
 		$canDo = ReservaHelper::getActions(); // Extrae los permisos del usuario actual
 		$bar = JToolBar::getInstance('toolbar');
@@ -45,7 +44,9 @@ class ReservaViewEventos extends JViewLegacy
 		{
 			JToolbarHelper::editList('evento.edit');
 		}
-		
+		$state = $this->get('State');
+
+		/*
 		if ($canDo->get('core.edit.state')) 
 		{
 			JToolbarHelper::publish('eventos.publish', 'JTOOLBAR_PUBLISH',true);
@@ -53,19 +54,18 @@ class ReservaViewEventos extends JViewLegacy
 			JToolbarHelper::archiveList('eventos.archive');
 			JToolbarHelper::checkin('eventos.checkin');
 		}
-		
+		*/
 		//agregar filtro a la vista para búsqueda
 		JHtmlSidebar::setAction('index.php?option=com_reserva&view=eventos');
-		JHtmlSidebar::addFilter(JText::_('JOPTION_SELECT_PUBLISHED'),'filter_state',
-		JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'),'value', 'text', 
-		$this->state->get('filter.state'), true));
+		JHtmlSidebar::addFilter(JText::_('JOPTION_SELECT_PUBLISHED'), 'filter_state', JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'),
+			'value', 'text', $this->state->get('filter.state'), true));
 		
-		/*
+		/*se reemplaza el boton de borrado por envio a la papelera en vez de borrado completamente
 		if ($canDo->get('core.delete'))
 		{
 			JToolBarHelper::deleteList('', 'eventos.delete', 'JTOOLBAR_DELETE');
 		}
-		se reemplaza el boton de borrado por envio a la papelera en vez de borrado completamente
+		
 		*/
 		$state  = $this->get('State');
 		if ($state->get('filter.state') == -2 && $canDo->get('core.delete'))
