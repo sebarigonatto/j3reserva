@@ -28,28 +28,24 @@ class ReservaHelper
         }
         return $result;
     }
-
-
     /**
     * agregar sub menus barra de navegacion
     * esta funcion crea un link a la vista por defecto reservas(vista de lista)
     * y  link a la vista de categorias
     */
-    public static function addSubmenu($vName = 'eventos')
+    public static function addSubmenu($vName = 'reservas')
     {
-        /*JHtmlSidebar::addEntry(
+        JHtmlSidebar::addEntry(
         JText::_('COM_RESERVA_SUBMENU_RESERVAS'),
         'index.php?option=com_reserva&view=reservas',
         $vName == 'reservas'
         );
-        */
-
+        
         JHtmlSidebar::addEntry(
         JText::_('COM_RESERVA_SUBMENU_EVENTOS'),
         'index.php?option=com_reserva&view=eventos',
         $vName == 'eventos'
         );
-
         JHtmlSidebar::addEntry(
         JText::_('COM_RESERVA_SUBMENU_ITEMS'),
         'index.php?option=com_reserva&view=items',
@@ -57,3 +53,4 @@ class ReservaHelper
         );
     }
 }
+?>
