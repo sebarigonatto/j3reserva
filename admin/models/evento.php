@@ -121,7 +121,6 @@ class ReservaModelEvento extends JModelAdmin
 
     public function save($data)
     {	
-
         $table_reserva = $this->getTable('Reserva', 'ReservaTable', array());
         $table_evento = $this->getTable('Evento', 'ReservaTable', array());
 
@@ -147,27 +146,28 @@ class ReservaModelEvento extends JModelAdmin
         }
         $insertarItems = array_diff($itemsReserva, $itemsExistentes);
         $borrarItems = array_diff($itemsExistentes, $itemsReserva);
+		$sinCambios = array_intersect($itemsReserva, $itemsExistentes);
 
         // Si los items insertados no se solapan con los existentes, se modifica la BD
 
-
-        // Primero insertar el evento
-        if (!$table_evento->bind($data))
-        {
-            $this->setError(JText::sprintf('EVENTO BIND FAILED', $user->getError()));
-            return false;
-        }
-        if (!$table_evento->save($data))
-        {
-            $this->setError($user->getError());
-            return false;
-        }
-
-        if ($this->thereIsOverlapping($insertarItems, $data['inicio'], $data['fin'])){
+        if (($this->thereIsOverlapping($insertarItems, $data['inicio'], $data['fin'])) || 
+		($this->thereIsOverlapping($sinCambios, $data['inicio'], $data['fin']))){
             $this->setError(JText::sprintf('COM_RESERVA_OVERLAPPING_EVENT', $this->getError()));
             return false;
         }
         else {
+			// Primero insertar el evento
+			if (!$table_evento->bind($data))
+			{
+				$this->setError(JText::sprintf('EVENTO BIND FAILED', $user->getError()));
+				return false;
+			}
+			if (!$table_evento->save($data))
+			{
+				$this->setError($user->getError());
+				return false;
+			}
+			
             // El ID del evento en la relación depende de si es nuevo o se está modificando
             if ($isNew) {
                 $data['evento_id'] = (int) $table_evento->id;
@@ -175,7 +175,7 @@ class ReservaModelEvento extends JModelAdmin
             else {
                 $data['evento_id'] = $data['id'];
             }
-
+			
             unset($data['items_checkboxes']);
             $data['id'] = '';
 

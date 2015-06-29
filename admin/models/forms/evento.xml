@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
 	<fieldset name="eventofields">
-		<field name="id" type="text" class="readonly" 
-			label="JGLOBAL_FIELD_ID_LABEL" readonly="true" 
+		<field name="id" type="text" class="hidden" 
+			label="JGLOBAL_FIELD_ID_LABEL"
 			description="JGLOBAL_FIELD_ID_DESC"/>
 
 		<field name="titulo" type="text" class="inputbox" 
