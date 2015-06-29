@@ -3,76 +3,88 @@
 defined('_JEXEC') or die;
 $listOrder = '';
 $listDirn = '';
-?>
-<form action="<?php echo JRoute::_('index.php?option=com_reserva&view=reservas'); ?>" method="post" name="adminForm" id="adminForm">
-	<div id="j-main-container" class="span10">
-		<div class="clearfix"> </div>
-		<table class="table table-striped" id="reservaList">
-			<thead>
-				<tr>
-					<th width="1%" class="hidden-phone"> 
-						<input type="checkbox" name="checkall-toggle" value="" 
-						titulo="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" 
-						onclick="Joomla.checkAll(this)" />
-					</th>
-					<th class="title"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_TITULO','a.titulo', $listDirn, $listOrder); ?></th>
-					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_DESCRIPCION', 'a.descripcion', $listDirn, $listOrder); ?></th>
-					<th width="1%" class="nowrap center "><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_INICIO', 'a.inicio', $listDirn, $listOrder); ?></th>
-					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_FIN', 'a.fin', $listDirn, $listOrder); ?></th>
-					<th width="1%" class="nowrap center "><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_LUGAR', 'a.lugar', $listDirn, $listOrder); ?></th>
-					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_ITEMS', 'c.nombre', $listDirn, $listOrder); ?></th>
-					<th width="1%" class="nowrap center "><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_TEL', 'a.tel', $listDirn, $listOrder); ?></th>
-					<th width="1%" class="nowrap center hidden-phone"><?php echo JHtml::_('grid.sort', 'COM_RESERVA_EVENTOS_MAIL', 'a.mail', $listDirn, $listOrder); ?></th>
-				</tr>
-			</thead>
-			<tbody>
-			<!--  agrega los items obtenidos del modelo a cada fila -->
-				<?php
+	
+ 
+	$doc = JFactory::getDocument();
+	$doc->addStyleSheet('http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/fullcalendar.min.css');
+	$doc->addStyleSheet('cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/fullcalendar.print.css');
+	$doc->addScript('http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js');
+	$doc->addCustomTag( '<script type="text/javascript">jQuery.noConflict();</script>' );
+	$doc->addScript('http://momentjs.com/downloads/moment.min.js');
+    $doc->addScript('http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/fullcalendar.min.js');
+//si agregamos este estilo seteamos espacio para el calendario 
+/*
+	$doc->addStyleDeclaration('
+	body {
+		margin: 40px 10px;
+		padding: 0;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		font-size: 14px;
+	}
+	#calendar {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+	');
+*/
+	$doc->addScriptDeclaration('
+		$(document).ready($(function(){
+				$("#calendar").fullCalendar({
+			header: {
+				left: "prev,next today",
+				center: "title",
+				right: "month,agendaWeek,agendaDay"
+			},
+			//defaultDate: "2015-02-12",
+			//editable: true,
+			eventLimit: true, // allow "more" link when too many events
+			//events: evento
+		});	
+		
+				
+				');
+				
+					//$doc = JFactory::getDocument();
+				
 				$i = 0;
 				$len = count($this->items);
 				while ($i < $len) {
-				$item = $this->items[$i]?>
-					<tr class="row<?php echo $i % 2; ?>">
-						<td class="center hidden-phone">
-							<?php echo JHtml::_('grid.id', $i, $item->id); ?>
-						</td>
-						<td class="nowrap has-context">
-							<a href="<?php echo JRoute::_('index.php?option=com_reserva&task=reserva.edit&id='.(int) $item->id); ?>">
-								<?php echo $this->escape($item->titulo); ?></a>
-						</td>
-						<td class="nowrap has-context">
-							<?php echo $this->escape($item->descripcion); ?>
-						</td>
-						<td class="nowrap has-context ">
-							<?php echo $this->escape($item->inicio); ?>
-						</td>
-						<td class="nowrap has-context center hidden-phone">
-							<?php echo $this->escape($item->fin); ?>
-						</td>
-						<td class="nowrap has-context">
-							<?php echo $this->escape($item->lugar); ?>
-						</td>
-						<td>
-						<?php $eventoActual = $item->evento_id;
+				$item = $this->items[$i];
+				
+				$inicio=new DateTime($item->inicio);
+				$fin=new DateTime($item->fin);
+				
+				$doc->addScriptDeclaration('
+					var eventoi=[
+									{	id: "'.$item->evento_id.'",
+										title: "'.$item->titulo.' '.$item->tel. ' '.$item->descripcion.'",
+										start: "'. $inicio->format(DateTime::ISO8601).'",
+										end: "'.$fin->format(DateTime::ISO8601).'",
+										url: "'.
+										  'index.php?option=com_reserva&task=evento.edit&id='.(int) $item->evento_id.'"
+									}
+								];
+					$("#calendar").fullCalendar( "addEventSource", eventoi );
+				');
+				
+						$eventoActual = $item->evento_id;
+						//filtra reservas con mismo id_evento y obtiene los item de ese evento
 						while (($i < $len) && ($eventoActual == $this->items[$i]->evento_id)) { 
-							echo $this->escape($this->items[$i]->nombre); ?> </br>
-						<?php $i = $i+1;} $i = $i-1; ?>
-						</td>
-						<td class="nowrap has-context">
-							<?php echo $this->escape($item->tel); ?>					
-						</td>
-						<td class="nowrap has-context center hidden-phone">
-							<?php echo $this->escape($item->mail); ?>
-						</td>                
-					</tr>
-				<?php $i = $i+1; } ?>
-			</tbody>
-		</table>
-
-		<input type="hidden" name="task" value="" />
-		<input type="hidden" name="boxchecked" value="0" />
-		<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
-		<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
-		<?php echo JHtml::_('form.token'); ?>
-    </div>
-</form>
+							//echo $this->escape($this->items[$i]->item_nombre); 
+						 $i = $i+1;} $i = $i-1; 
+							//echo $this->escape($item->tel);
+			
+							 //echo $this->escape($item->mail);
+			
+			
+						$i = $i+1; }
+						//cierra el scrip todo los eventos deben ser cargados una vez que cargo la pagina sino no los muestra
+	$doc->addScriptDeclaration('}));');
+?>
+<div id="j-sidebar-container-fluid" class="span2">
+        <?php  echo $this->sidebar; 
+		/*muestra la barra de sub_menu del archivo /helpers/reserva.php */
+		?>
+      
+</div>
+  <div id='calendar' ></div>
