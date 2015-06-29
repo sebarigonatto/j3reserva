@@ -25,7 +25,7 @@ class ReservaViewEvento extends JViewLegacy
 	protected function addToolbar()
 	{
 		JFactory::getApplication()->input->set('hidemainmenu', true);
-		JToolbarHelper::title(JText::_('COM_RESERVA_MANAGER_RESERVA'), '');
+		JToolbarHelper::title(JText::_('COM_RESERVA_MANAGER_EVENTO'), '');
 		JToolbarHelper::save('evento.save');
 		if (empty($this->item->id))
 		{

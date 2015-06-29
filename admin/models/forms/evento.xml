@@ -22,7 +22,7 @@
 			size="22" format="%Y-%m-%d HH" filter="user_utc" multiple ="true"/>
 		-->
 		<field name="inicio" type="DateTime"  class="inputbox"
-			label="COM_RESERVA_FIELD_FIN_LABEL" description="COM_RESERVA_FIELD_FIN_DESC"
+			label="COM_RESERVA_FIELD_INICIO_LABEL" description="COM_RESERVA_FIELD_INICIO_DESC"
 			size="22" format="%Y-%m-%d" filter="user_utc" />
 			
 		<field name="fin" type="DateTime"  class="inputbox"
