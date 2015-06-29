@@ -41,7 +41,7 @@ $itemsOptions=$items->getOptions();
 					</div>
 					<div class="control-group">
 						<div class="control-label"> <?php echo $this->form->getLabel('items_checkboxes'); ?> </div>
-						<div class="controls"><?php echo $this->form->getInput('items_checkboxes'); ?></div>
+						<div class="controls" style="display: block"><?php echo $this->form->getInput('items_checkboxes'); ?></div>
 					</div>
 					<div class="control-group">
 						<div class="control-label"> <?php echo $this->form->getLabel('precio'); ?> </div>
