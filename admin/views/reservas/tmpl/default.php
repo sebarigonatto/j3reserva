@@ -66,7 +66,7 @@ $listDirn = '';
 										title: "'.$item->titulo.'\n '.$item->tel.'\n '.$item->descripcion.'\n '.$itemsnombres.'",
 										start: "'. $inicio->format(DateTime::ISO8601).'",
 										end: "'.$fin->format(DateTime::ISO8601).'",
-										//url: "'.
+										url: "'.
 										  'index.php?option=com_reserva&task=evento.edit&id='.(int) $item->evento_id.'"
 									}
 								];
