@@ -18,24 +18,19 @@ class JFormFieldDateTime extends JFormField {
     public function getInput() {
 			// id="'.$this->id.'" name="'.$this->name. this->value'">' es fundamental para lo encuentre el modelo o la vista
 			//y traiga los datos guardados
-			
-			/* 
-						
-			*/
-	//var_dump($this);
             return //'<div class="well">'.
-                '<div class="datetimepicker2" class="input-append">'.
-                    '<input data-format="yyyy-MM-dd hh:mm:ss" type="text" id="'.$this->id.'" name="'.$this->name.'" value="'.$this->value.'" ></input>'.
-                    '<span class="add-on">'.
-                        '<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>'.
-                    '</span>'.
-                '</div>'.
-                '<script type="text/javascript">'.
-                    'jQuery(function() {'. 'jQuery(".datetimepicker2").datetimepicker({'.
-                        'language: "es",'. 'pick12HourFormat: true'.
-                        '});'.
-                    '});'.
-                '</script>';
+				'<div class="datetimepicker2" class="input-append">'.
+					'<input data-format="yyyy-MM-dd hh:mm:ss" type="text" id="'.$this->id.'" name="'.$this->name.'" value="'.$this->value.'" onChange="updatePrice();"></input>'.
+					'<span class="add-on">'.
+						'<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>'.
+					'</span>'.
+				'</div>'.
+				'<script type="text/javascript">'.
+					'jQuery(function() {'. 'jQuery(".datetimepicker2").datetimepicker({'.
+						'language: "es",'. 'pick12HourFormat: true'.
+						'});'.
+					'});'.
+				'</script>';
 			
 				
    }

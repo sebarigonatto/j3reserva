@@ -8,6 +8,30 @@ JFormHelper::addFieldPath(JPATH_COMPONENT . '/models/fields');
 $items = JFormHelper::loadFieldType('itemsselect', false);
 $itemsOptions=$items->getOptions();
 */
+
+$doc = JFactory::getDocument();
+$doc->addScript('http://momentjs.com/downloads/moment.js');
+$doc->addScriptDeclaration('
+	function updatePrice() {
+		var inicio = document.getElementById("jform_inicio").value;
+		var fin = document.getElementById("jform_fin").value;
+		var ms = moment(fin,"YYYY-MM-DD hh:mm:ss").diff(moment(inicio,"YYYY-MM-DD hh:mm:ss"));
+		var timediff = moment.duration(ms);
+		
+		var checks = document.getElementsByName("jform[items_checkboxes][]");
+		var price = 0;
+		for (i=0;i<checks.length;i++){
+			var check = checks[i];
+			if (check.checked){
+				var itemDesc = check.nextSibling.innerHTML;
+				var parts = itemDesc.split("$");
+				price = price + parseFloat(parts[1]);
+            }
+		}
+		price = price * timediff.asHours();
+		document.getElementById("jform_precio").value = "$" + price;
+	}	
+    ');
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_reserva&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 	<div class="row-fluid">
@@ -17,6 +41,7 @@ $itemsOptions=$items->getOptions();
 				<?php echo JHtml::_('bootstrap.addPanel', 'myTab', 'details', empty($this->item->id) ?
 					JText::_('COM_RESERVA_NEW_EVENTO', true) : JText::sprintf('COM_RESERVA_EDIT_EVENTO',$this->item->id, true)); ?>
 					<div class="control-group">
+						<div class="control-label"> <?php echo $this->form->getLabel('id'); ?> </div>
 						<div class="controls"> <?php echo $this->form->getInput('id'); ?> </div>
 					</div>
 					<div class="control-group">
@@ -33,11 +58,11 @@ $itemsOptions=$items->getOptions();
 					</div>
 					<div class="control-group">
 						<div class="control-label"> <?php echo $this->form->getLabel('inicio'); ?> </div>
-						<div class="controls"> <?php echo $this->form->getInput('inicio'); ?> </div>
+						<div class="controls" id="eventoinicio"> <?php echo $this->form->getInput('inicio'); ?> </div>
 					</div>
 					<div class="control-group">
 						<div class="control-label"> <?php echo $this->form->getLabel('fin'); ?> </div>
-						<div class="controls"> <?php echo $this->form->getInput('fin'); ?> </div>
+						<div class="controls" id="eventofin"> <?php echo $this->form->getInput('fin'); ?> </div>
 					</div>
 					<div class="control-group">
 						<div class="control-label"> <?php echo $this->form->getLabel('items_checkboxes'); ?> </div>

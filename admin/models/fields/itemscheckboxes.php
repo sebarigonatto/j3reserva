@@ -21,7 +21,7 @@ class JFormFieldItemsCheckBoxes extends JFormField
 	//var_dump( $this);
       foreach($items as $item){
 		$checked = $this->getValues($item->value);
-         $var_list.= '<input name="'.$this->name.'" ' . $checked . 'type="checkbox" value="'.$item->value.'">'.$item->text.'<br />';
+         $var_list.= '<div><input name="'.$this->name.'" ' . $checked . 'type="checkbox" value="'.$item->value.'" onChange="updatePrice();"><span>'.$item->text.'</span></div>';
       }
       return $var_list;
    }
