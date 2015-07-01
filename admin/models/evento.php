@@ -43,10 +43,9 @@ class ReservaModelEvento extends JModelAdmin
         {
             $data = $this->getItem();
         }
-        $itemList=$this->getEventosItemlist();
         if (!empty( $this->_itemslist )) {
                 //evita error de crear eventos sin items
-                $data->items_checkboxes=$itemList;
+		$data->items_checkboxes=$this->_itemslist;
         }
         return $data;
     }
