@@ -75,11 +75,7 @@
     //cierra el scrip todo los eventos deben ser cargados una vez que cargo la pagina sino no los muestra
     $doc->addScriptDeclaration('}));');
 ?>
-<div id="j-sidebar-container-fluid" class="span2">
-    <?php  echo $this->sidebar; 
-            /*muestra la barra de sub_menu del archivo /helpers/reserva.php */
-    ?>
-</div>
+
 <div id="j-main-container">
     <div id='calendar' ></div>      
 </div>
