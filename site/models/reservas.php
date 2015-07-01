@@ -55,7 +55,7 @@ class ReservaModelReservas extends JModelList
             ->from($db->quoteName('#__reserva_evento', 'b'))
             ->join('LEFT OUTER', $db->quoteName('#__reserva_reserva', 'a') . ' ON (' . $db->quoteName('a.evento_id') . ' = ' . $db->quoteName('b.id') . ')')
             ->join('LEFT OUTER', $db->quoteName('#__reserva_item', 'c') . ' ON (' . $db->quoteName('a.item_id') . ' = ' . $db->quoteName('c.id') . ')');
-			$query->order('evento_inicio', 'evento_id');
+			$query->order('evento_id');
 	return $query;
 	}
 }
