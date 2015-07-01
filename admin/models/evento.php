@@ -151,16 +151,18 @@ class ReservaModelEvento extends JModelAdmin
         }
         $insertarItems = array_diff($itemsReserva, $itemsExistentes);
         $borrarItems = array_diff($itemsExistentes, $itemsReserva);
-		$sinCambios = array_intersect($itemsReserva, $itemsExistentes);
+	$sinCambios = array_intersect($itemsReserva, $itemsExistentes);
 
         // Si los items insertados no se solapan con los existentes, se modifica la BD
 
-        if (($this->thereIsOverlapping($insertarItems, $data['inicio'], $data['fin'])) || 
-		($this->thereIsOverlapping($sinCambios, $data['inicio'], $data['fin']))){
-            $this->setError(JText::sprintf('COM_RESERVA_OVERLAPPING_EVENT', $this->getError()));
-            return false;
-        }
-        else {
+        if ($this->thereIsOverlapping(0, $insertarItems, $data['inicio'], $data['fin'])) {
+        	$this->setError(JText::sprintf('COM_RESERVA_OVERLAPPING_EVENT', $this->getError()));
+    		return false;
+        } else {
+		if ((!$isNew) && ($this->thereIsOverlapping($data['id'], $sinCambios, $data['inicio'], $data['fin']))) {
+	            $this->setError(JText::sprintf('COM_RESERVA_OVERLAPPING_EVENT', $this->getError()));
+	            return false;
+		} else {
 			// Primero insertar el evento
 			if (!$table_evento->bind($data))
 			{
@@ -172,23 +174,24 @@ class ReservaModelEvento extends JModelAdmin
 				$this->setError(JText::sprintf('EVENTO SAVE FAILED', $this->getError()));
 				return false;
 			}
+				
+			// El ID del evento en la relación depende de si es nuevo o se está modificando
+			if ($isNew) {
+			$data['evento_id'] = (int) $table_evento->id;
+			}
+			else {
+			$data['evento_id'] = $data['id'];
+			}
+				
+			unset($data['items_checkboxes']);
+			$data['id'] = '';
 			
-            // El ID del evento en la relación depende de si es nuevo o se está modificando
-            if ($isNew) {
-                $data['evento_id'] = (int) $table_evento->id;
-            }
-            else {
-                $data['evento_id'] = $data['id'];
-            }
+			// Finalmente se crean las relaciones y se borran otras según corresponda
+			$this->deleteItems($data['evento_id'], $borrarItems);
+			$this->insertItems($table_reserva, $data, $insertarItems);
 			
-            unset($data['items_checkboxes']);
-            $data['id'] = '';
-
-            // Finalmente se crean las relaciones y se borran otras según corresponda
-            $this->deleteItems($data['evento_id'], $borrarItems);
-            $this->insertItems($table_reserva, $data, $insertarItems);
-
-            return true;
+			return true;
+		}
         }
     }
 
@@ -254,10 +257,10 @@ class ReservaModelEvento extends JModelAdmin
         return $listaResultado;
     }
 
-    protected function thereIsOverlapping($items, $inicio, $fin){
+    protected function thereIsOverlapping($evento_id, $items, $inicio, $fin){
         foreach ($items as $item)
         {
-            if ($this->overlaps($item, $inicio, $fin))
+            if ($this->overlaps($evento_id, $item, $inicio, $fin))
             {
                 return true;
             }
@@ -265,7 +268,7 @@ class ReservaModelEvento extends JModelAdmin
         return false;
     }
 
-    protected function overlaps($item, $inicio, $fin){
+    protected function overlaps($evento_id, $item, $inicio, $fin){
         $db =&JFactory::getDBO();
         $query = $db->getQuery(true);
         $query->select('COUNT(*) AS overlap')
@@ -273,6 +276,9 @@ class ReservaModelEvento extends JModelAdmin
                 ->join('INNER', $db->quoteName('#__reserva_reserva', 'a') . ' ON (' . $db->quoteName('a.evento_id') . ' = ' . $db->quoteName('b.id') . ')')
                 ->join('INNER', $db->quoteName('#__reserva_item', 'c') . ' ON (' . $db->quoteName('a.item_id') . ' = ' . $db->quoteName('c.id') . ')');
         $query->where($db->quoteName('c.id') . '=' . $item, 'AND');
+        if ($evento_id != 0) {
+        	$query->where($db->quoteName('b.id') . '<>' . $evento_id, 'AND');
+        }
         $query->where($db->quoteName('c.state') . '<> -2', 'AND');
         $query->where($db->quoteName('b.fin') . '>\'' . $inicio . '\'', 'AND');
         $query->where($db->quoteName('b.inicio') . '<\'' . $fin . '\'');
