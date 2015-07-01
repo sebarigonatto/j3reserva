@@ -46,13 +46,13 @@
     $len = count($this->items);
     while ($i < $len) {
         $item = $this->items[$i];
-        $inicio=new DateTime($item->inicio);
-        $fin=new DateTime($item->fin);
+        $inicio=new DateTime($item->evento_inicio);
+        $fin=new DateTime($item->evento_fin);
         $itemsnombres='';
         $eventoActual = $item->evento_id;
                         //filtra reservas con mismo id_evento y obtiene los item de ese evento
         while (($i < $len) && ($eventoActual == $this->items[$i]->evento_id)) { 
-            $itemsnombres.=' '.$this->items[$i]->nombre; 
+            $itemsnombres.=' '.$this->items[$i]->item_nombre; 
             $i = $i+1;
         } 
         $i = $i-1; 
@@ -60,10 +60,10 @@
         $doc->addScriptDeclaration('
             var eventoi=[
                     {	id: "'.$item->evento_id.'",
-                        title: "'.$item->titulo.'\n '.$item->tel.'\n '.$item->descripcion.'\n '.$itemsnombres.'",
+                        title: "'.$item->evento_titulo.'\n '.$item->tel.'\n '.$item->evento_descripcion.'\n '.$itemsnombres.'",
                         start: "'. $inicio->format(DateTime::ISO8601).'",
                         end: "'.$fin->format(DateTime::ISO8601).'",
-                        //url: "'. 'index.php?option=com_reserva&task=evento.edit&id='.(int) $item->evento_id.'"
+                        url: "'. 'index.php?option=com_reserva&task=evento.edit&id='.(int) $item->evento_id.'"
                     }
             ];
             $("#calendar").fullCalendar( "addEventSource", eventoi );
