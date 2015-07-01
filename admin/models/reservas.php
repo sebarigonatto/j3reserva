@@ -1,69 +1,50 @@
 <?php
-// La vista que realmente se muestra. Por defecto, Joomla espera encontrar un layout llamado default para las vistas de listas
+/*
+ * modelo para la Vista Reservas
+ * Selecciona los datos de la base de datos que se muestran en la vista
+ */
 defined('_JEXEC') or die;
-$listOrder = '';
-$listDirn = '';
+class ReservaModelReservas extends JModelList
+{
+    public function __construct($config = array())
+    {//se setean los campos que se necesitaran en la vista
+		if (empty($config['filter_fields']))
+		{
+			$config['filter_fields'] = array(
+			'evento_id', 'b.id',
+			'evento_titulo', 'b.titulo',
+			'evento_inicio', 'b.inicio',
+			'evento_fin', 'b.fin',
+			'evento_lugar', 'b.lugar',
+			'evento_descripcion', 'b.descripcion',
+			'evento_tel', 'b.tel',
+			'evento_mail', 'b.mail',
+			'item_id', 'c.id',
+			'item_nombre', 'c.nombre',
+			'item_imagen','c.img',
+			'item_descripcion','c.descripcion',
+			'precio','a.precio'
+			);
+		}
+		parent::__construct($config);
+	}
 	
- 
-	$doc = JFactory::getDocument();
-	$doc->addStyleSheet('http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/fullcalendar.min.css');
-	$doc->addStyleSheet('cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/fullcalendar.print.css');
-	$doc->addScript('http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js');
-	$doc->addCustomTag( '<script type="text/javascript">jQuery.noConflict();</script>' );
-	$doc->addScript('http://momentjs.com/downloads/moment.min.js');
-    $doc->addScript('http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/fullcalendar.min.js');
-
-	$doc->addScriptDeclaration('
-		$(document).ready($(function(){
-				$("#calendar").fullCalendar({
-			header: {
-				left: "prev,next today",
-				center: "title",
-				right: "month,agendaWeek,agendaDay"
-			},
-			//defaultDate: "2015-02-12",
-			//editable: true,
-			eventLimit: true, // allow "more" link when too many events
-			//events: evento
-		});	
-	');
-	
-	$i = 0;
-	$len = count($this->items);
-	while ($i < $len) {
-	$item = $this->items[$i];
-	$inicio=new DateTime($item->inicio);
-	$fin=new DateTime($item->fin);
-	$itemsnombres='';
-	$eventoActual = $item->evento_id;
-			//filtra reservas con mismo id_evento y obtiene los item de ese evento
-			while (($i < $len) && ($eventoActual == $this->items[$i]->evento_id)) { 
-				$itemsnombres.=' '.$this->items[$i]->nombre; 
-			 $i = $i+1;} $i = $i-1; 
-			 
-	$doc->addScriptDeclaration('
-		var eventoi=[
-			{	id: "'.$item->evento_id.'",
-				title: "'.$item->titulo.'\n '.$item->tel.'\n '.$item->descripcion.'\n '.$itemsnombres.'",
-				start: "'. $inicio->format(DateTime::ISO8601).'",
-				end: "'.$fin->format(DateTime::ISO8601).'",
-				url: "'.
-				  'index.php?option=com_reserva&task=evento.edit&id='.(int) $item->evento_id.'"
-			}
-		];
-		$("#calendar").fullCalendar( "addEventSource", eventoi );
-	');
-	
-	$i = $i+1; }
-	//cierra el scrip todo los eventos deben ser cargados una vez que cargo la pagina sino no los muestra
-	$doc->addScriptDeclaration('}));');
-?>
-<div id="j-sidebar-container-fluid" class="span2">
-        <?php  echo $this->sidebar; 
-		/*muestra la barra de sub_menu del archivo /helpers/reserva.php */
-		?>
-      
-</div>
-<div id="j-main-container">
-	<div id='calendar' ></div>      
-</div>
+	// Prepara la consulta para seleccionar la información necesaria.
+	protected function getListQuery()
+	{
+		$db = $this->getDbo();
+		$query = $db->getQuery(true);
+		//realizar un inner join para obtener la relacion Muchos a Muchos entre eventos e items
+		/* sql probado
+		 SELECT * FROM (az94y_eventos_items INNER JOIN az94y_eventos ON az94y_eventos_items.eventos_id = az94y_eventos.id) 
+				  INNER JOIN az94y_items ON az94y_eventos_items.items_id = az94y_items.id
+		  
+		 */
+		$query->select(array('a.*', 'b.*', 'c.*'))
+			->from($db->quoteName('#__reserva_reserva', 'a'))
+			->join('INNER', $db->quoteName('#__reserva_evento', 'b') . ' ON (' . $db->quoteName('a.evento_id') . ' = ' . $db->quoteName('b.id') . ')')
+			->join('INNER', $db->quoteName('#__reserva_item', 'c') . ' ON (' . $db->quoteName('a.item_id') . ' = ' . $db->quoteName('c.id') . ')')
+			->order('a.evento_id');
+		return $query;
+	}
+}
