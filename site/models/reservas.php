@@ -1,12 +1,3 @@
-<?php
-
-/*
- * modelo para la Vista Reservas
- * Selecciona los datos de la base de datos que se muestran en la vista
- */
-
-defined('_JEXEC') or die;
-
 class ReservaModelReservas extends JModelList
 {
     public function __construct($config = array())
@@ -37,18 +28,13 @@ class ReservaModelReservas extends JModelList
 	{
 		$db = $this->getDbo();
 		$query = $db->getQuery(true);
-
 		//realizar un inner join para obtener la relacion Muchos a Muchos entre eventos e items
-		/* sql probado
-		 SELECT * FROM (az94y_eventos_items INNER JOIN az94y_eventos ON az94y_eventos_items.eventos_id = az94y_eventos.id) 
-				  INNER JOIN az94y_items ON az94y_eventos_items.items_id = az94y_items.id
-		  
-		 */
 		$query->select(array('a.*', 'b.*', 'c.*'))
 			->from($db->quoteName('#__reserva_reserva', 'a'))
 			->join('INNER', $db->quoteName('#__reserva_evento', 'b') . ' ON (' . $db->quoteName('a.evento_id') . ' = ' . $db->quoteName('b.id') . ')')
 			->join('INNER', $db->quoteName('#__reserva_item', 'c') . ' ON (' . $db->quoteName('a.item_id') . ' = ' . $db->quoteName('c.id') . ')')
-			->orderBy('b.id');
+			->order('a.evento_id');
 		return $query;
 	}
 }
+?>

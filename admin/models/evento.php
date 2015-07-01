@@ -121,6 +121,11 @@ class ReservaModelEvento extends JModelAdmin
 
     public function save($data)
     {	
+		if ($data['inicio'] > $data['fin']) {
+			$this->setError(JText::sprintf('COM_RESERVA_WRONG_DATETIME', $this->getError()));
+			return false;
+		}
+	
         $table_reserva = $this->getTable('Reserva', 'ReservaTable', array());
         $table_evento = $this->getTable('Evento', 'ReservaTable', array());
 
@@ -164,7 +169,7 @@ class ReservaModelEvento extends JModelAdmin
 			}
 			if (!$table_evento->save($data))
 			{
-				$this->setError($user->getError());
+				$this->setError(JText::sprintf('EVENTO SAVE FAILED', $this->getError()));
 				return false;
 			}
 			
@@ -204,7 +209,7 @@ class ReservaModelEvento extends JModelAdmin
             // Store the data.
             if (!$table_reserva->save($data))
             {
-                $this->setError($user->getError());
+                $this->setError(JText::sprintf('RESERVA SAVE FALIED', $this->getError()));
                 return false;
             }
         }

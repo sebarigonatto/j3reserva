@@ -29,7 +29,9 @@ $doc->addScriptDeclaration('
             }
 		}
 		price = price * timediff.asHours();
-		document.getElementById("jform_precio").value = "$" + price;
+		if (price > 0) {
+			document.getElementById("jform_precio").value = "$" + price;
+		}
 	}	
     ');
 ?>
@@ -41,7 +43,6 @@ $doc->addScriptDeclaration('
 				<?php echo JHtml::_('bootstrap.addPanel', 'myTab', 'details', empty($this->item->id) ?
 					JText::_('COM_RESERVA_NEW_EVENTO', true) : JText::sprintf('COM_RESERVA_EDIT_EVENTO',$this->item->id, true)); ?>
 					<div class="control-group">
-						<div class="control-label"> <?php echo $this->form->getLabel('id'); ?> </div>
 						<div class="controls"> <?php echo $this->form->getInput('id'); ?> </div>
 					</div>
 					<div class="control-group">
